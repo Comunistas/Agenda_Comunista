@@ -55,6 +55,9 @@ public class MantenimientoService {
 	public HashMap<String, CamaradaDTO> listarCamaradas(Connection cn) throws Exception{
 		return objCamaradaDAO.listarCamaradas(cn);
 	}
+	public HashMap<String, CamaradaDTO> listarCamaradas(Connection cn, int cod_pro) throws Exception {
+		return objCamaradaDAO.listarCamaradas(cn, cod_pro);
+	}
 	public int grabarCamarada(Connection cn,CamaradaDTO cam) throws Exception{
 		return objCamaradaDAO.grabarCamarada(cn, cam);
 	}
@@ -67,6 +70,7 @@ public class MantenimientoService {
 	public CamaradaDTO obtenerCamarada(Connection cn, String codigo) throws Exception {
 		return objCamaradaDAO.obtenerCamarada(cn, codigo);
 	}
+
 	
 	/*
 	 * ComentarioDAO
@@ -216,6 +220,9 @@ public class MantenimientoService {
 	public TreeMap<Integer, ProyectoDTO> listarProyectos(Connection cn) throws Exception{
 		return objProyectoDAO.listarProyectos(cn);
 	}
+	public TreeMap<Integer, ProyectoDTO> listarProyectos(Connection cn, CamaradaDTO cam) throws Exception{
+		return objProyectoDAO.listarProyectos(cn, cam);
+	}
 	public int grabarProyecto(Connection cn,ProyectoDTO pro) throws Exception{
 		return objProyectoDAO.grabarProyecto(cn, pro);
 	}
@@ -224,6 +231,12 @@ public class MantenimientoService {
 	}
 	public int eliminarProyecto(Connection cn,ProyectoDTO pro) throws Exception{
 		return objProyectoDAO.eliminarProyecto(cn, pro);
+	}
+	public ProyectoDTO obtenerProyecto(Connection cn, int cod_pro) throws Exception{
+		return objProyectoDAO.obtenerProyecto(cn, cod_pro);
+	}
+	public ProyectoDTO obtenerProyecto(Connection cn, String llave) throws Exception{
+		return objProyectoDAO.obtenerProyectoPorLlave(cn, llave);
 	}
 	
 	/*
