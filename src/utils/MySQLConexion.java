@@ -22,5 +22,9 @@ public class MySQLConexion {
 		}
 		return con;
 	}
+	
+	public static Connection getConexion(String bd) {
+		return getConexion(bd,null);
+	}
 
 }
