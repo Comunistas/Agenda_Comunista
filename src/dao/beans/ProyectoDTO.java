@@ -3,6 +3,7 @@ package dao.beans;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class ProyectoDTO {
 
@@ -106,4 +107,40 @@ public class ProyectoDTO {
 		this.fec_fin_pro = sdf.format(fec_fin_pro);
 	}
 
+	
+	
+	public void generarLlave(){
+		StringBuffer text = new StringBuffer();
+		
+		int nl = 0;
+		int i = 0;
+		
+		do{
+			if(nl==0){
+				text.append((char)generarCaracterDeLetra());
+			}else{
+				text.append(generarNumero());
+			}
+			
+			nl = (int)(Math.random()*2+0);
+			
+			i++;
+		}while(i<50);
+		
+		llave = text.toString();
+	}
+
+	private int generarCaracterDeLetra(){
+		int numero = 0;
+		Random r = new Random();
+		
+		do{
+			numero = r.nextInt(123-65) + 65;
+		}while(numero>90&&numero<97);
+		return numero;
+	}
+	
+	private int generarNumero(){
+		return (int)(Math.random()*9+0);
+	}
 }
