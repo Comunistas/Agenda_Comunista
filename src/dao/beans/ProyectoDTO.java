@@ -7,26 +7,28 @@ import java.util.Date;
 public class ProyectoDTO {
 
 	private int cod_pro;
-	private String nom_pro, fec_ini_pro, fec_lim_pro, fec_fin_pro;
+	private String nom_pro, fec_ini_pro, fec_lim_pro, fec_fin_pro, llave;
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 	public ProyectoDTO(int cod_pro, String nom_pro, String fec_ini_pro,
-			String fec_lim_pro, String fec_fin_pro) {
+			String fec_lim_pro, String fec_fin_pro, String llave) {
 		this.cod_pro = cod_pro;
 		this.nom_pro = nom_pro;
 		setFec_ini_pro(fec_ini_pro);
 		setFec_lim_pro(fec_lim_pro);
 		setFec_fin_pro(fec_fin_pro);
+		this.llave = llave;
 	}
 
 	public ProyectoDTO(int cod_pro, String nom_pro, Date fec_ini_pro,
-			Date fec_lim_pro, Date fec_fin_pro) {
+			Date fec_lim_pro, Date fec_fin_pro, String llave) {
 		this.cod_pro = cod_pro;
 		this.nom_pro = nom_pro;
 		setFec_ini_pro(fec_ini_pro);
 		setFec_lim_pro(fec_lim_pro);
 		setFec_fin_pro(fec_fin_pro);
+		this.llave = llave;
 	}
 
 	public int getCod_pro() {
@@ -45,6 +47,14 @@ public class ProyectoDTO {
 		this.nom_pro = nom_pro;
 	}
 
+	public String getLlave() {
+		return llave;
+	}
+
+	public void setLlave(String llave) {
+		this.llave = llave;
+	}
+	
 	public String getFec_ini_pro() {
 		return fec_ini_pro;
 	}
@@ -78,6 +88,10 @@ public class ProyectoDTO {
 		} else
 			this.fec_fin_pro = fec_fin_pro;
 	}
+
+	
+	
+
 
 	// Metodos de fechas
 	public void setFec_ini_pro(Date fec_ini_pro) {

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.TreeMap;
 
+import dao.beans.CamaradaDTO;
 import dao.beans.ProyectoDTO;
 import dao.interfaces.ProyectoDAO;
 import utils.MySQLConexion;
@@ -32,7 +33,7 @@ public class MySQLProyectoDAO implements ProyectoDAO{
 			
 			while(rs.next()){
 				p = new ProyectoDTO(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5));
+						rs.getString(4), rs.getString(5), rs.getString(6));
 				lista.put(p.getCod_pro(), p);
 			}
 			
@@ -45,6 +46,43 @@ public class MySQLProyectoDAO implements ProyectoDAO{
 		return lista;
 	}
 
+	@Override
+	public TreeMap<Integer, ProyectoDTO> listarProyectos(Connection con, CamaradaDTO cam) throws Exception {
+		
+		Connection cn = MySQLConexion.getConexion(DAOFactory.bd, con);
+		ResultSet rs = null;
+		String sql = "";
+		
+		TreeMap<Integer, ProyectoDTO> lista = null;
+		
+		try{
+			
+			sql = "select p.* from tb_proyecto p inner join tb_proyecto_integrante pi on p.cod_pro = pi.cod_pro "
+					+ "where pi.cod_cam = ?";
+			PreparedStatement pst = cn.prepareStatement(sql);
+			
+			pst.setString(1, cam.getCod_cam());
+			
+			rs = pst.executeQuery();
+			
+			lista = new TreeMap<Integer, ProyectoDTO>();
+			ProyectoDTO p=null;
+			
+			while(rs.next()){
+				p = new ProyectoDTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6));
+				lista.put(p.getCod_pro(), p);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Error al listar los proyectos por camarada. /* MySQLProyectoDAO */");
+			throw e;
+		}
+		
+		return lista;
+	}
+	
 	@Override
 	public int grabarProyecto(Connection con, ProyectoDTO pro) throws Exception {
 		Connection cn =MySQLConexion.getConexion(DAOFactory.bd, con);
@@ -90,6 +128,7 @@ public class MySQLProyectoDAO implements ProyectoDAO{
 			pst.setString(3, pro.getFec_lim_pro());
 			pst.setString(4, pro.getFec_fin_pro());
 			
+			
 			pst.setInt(5, pro.getCod_pro());
 
 			rs = pst.executeUpdate();
@@ -124,5 +163,82 @@ public class MySQLProyectoDAO implements ProyectoDAO{
 	}
 
 
+
+	@Override
+	public ProyectoDTO obtenerProyectoPorLlave(Connection con, String llave) throws Exception {
+		
+		Connection cn = null;
+		ResultSet rs = null;
+		String sql = "";
+		ProyectoDTO p = null;
+		
+		try{
+			cn = MySQLConexion.getConexion(DAOFactory.bd, con);
+			
+			sql = "select * from tb_proyecto where llave = ?";
+			
+			PreparedStatement pst = cn.prepareStatement(sql);
+			
+			pst.setString(1, llave);
+			
+			rs = pst.executeQuery();
+			
+			if(rs.next())
+				p = new ProyectoDTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6));
+			
+			if(p==null)
+				throw new Exception("No se encontró el proyecto");
+			
+			
+		}catch(Exception e){
+			imprimirError("Error al obtener proyecto por llave.");
+			throw e;
+		}
+		
+		return p;
+	}
+
+	@Override
+	public ProyectoDTO obtenerProyecto(Connection con, int cod_pro) throws Exception {
+		Connection cn = null;
+		ResultSet rs = null;
+		String sql = "";
+		ProyectoDTO p = null;
+		
+		try{
+			cn = MySQLConexion.getConexion(DAOFactory.bd, con);
+			
+			sql = "select * from tb_proyecto where cod_pro = ?";
+			
+			PreparedStatement pst = cn.prepareStatement(sql);
+			
+			pst.setInt(1, cod_pro);
+			
+			rs = pst.executeQuery();
+			
+			if(rs.next())
+				p = new ProyectoDTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6));
+			
+			if(p==null)
+				throw new Exception("No se encontró el proyecto");
+			
+			
+		}catch(Exception e){
+			imprimirError("Error al obtener proyecto por código.");
+			throw e;
+		}
+		
+		return p;
+	}
+
+	private void imprimirError(String error){
+		System.out.println(error+" "+nombreClase());
+	}
+	
+	public static String nombreClase(){
+		return "/* MySQLProyectoDAO */";
+	}
 
 }

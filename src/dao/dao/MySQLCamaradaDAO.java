@@ -40,7 +40,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			CamaradaDTO c;
 			
 			while(rs.next()){
-				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 				lista.put(c.getCod_cam(), c);
 			}
 			
@@ -63,7 +63,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 		try{
 			
 			cn = MySQLConexion.getConexion(DAOFactory.bd, con);
-			sql = "insert tb_camarada values(?,?,?,?,?)";
+			sql = "insert tb_camarada values(?,?,?,?,?,?)";
 			
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, cam.getCod_cam());
@@ -71,6 +71,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			pst.setString(3, cam.getApe_cam());
 			pst.setString(4, cam.getTel_cam());
 			pst.setString(5, cam.getPwd_cam());
+			pst.setString(6, cam.getFec_ult_ing());
 			
 			rs = pst.executeUpdate();
 			
@@ -96,7 +97,8 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			sql = "update tb_camarada set nom_cam = ?,"
 					+ "ape_cam = ?,"
 					+ "tel_cam = ?,"
-					+ "pwd_cam = ? "
+					+ "pwd_cam = ?,"
+					+ "fec_ult_ing = ?,"
 					+ "where cod_cam = ?";
 			
 			PreparedStatement pst = cn.prepareStatement(sql);
@@ -104,7 +106,8 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			pst.setString(2, cam.getApe_cam());
 			pst.setString(3, cam.getTel_cam());
 			pst.setString(4, cam.getPwd_cam());
-			pst.setString(5, cam.getCod_cam());
+			pst.setString(5, cam.getFec_ult_ing());
+			pst.setString(6, cam.getCod_cam());
 			
 			rs = pst.executeUpdate();
 			
@@ -162,7 +165,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			rs = pst.executeQuery();
 			
 			if(rs.next()){
-				cam = new CamaradaDTO(codigo, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				cam = new CamaradaDTO(codigo, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 			}
 			
 			if(cam==null)

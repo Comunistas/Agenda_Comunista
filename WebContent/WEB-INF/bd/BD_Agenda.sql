@@ -18,6 +18,7 @@ nom_pro varchar(200),
 fec_ini_pro date,
 fec_lim_pro date,
 fec_fin_pro date,
+llave varchar(50),
 primary key (cod_pro)
 );
 
@@ -28,6 +29,13 @@ des_per varchar(70),
 primary key(cod_per)
 );
 
+create table tb_tipo_documento
+(
+cod_tipo_doc int auto_increment not null,
+des_tipo_doc varchar(20),
+primary key (cod_tipo_doc)
+);
+
 create table tb_camarada
 (
 cod_cam char(10) not null,
@@ -35,6 +43,7 @@ nom_cam varchar(200),
 ape_cam varchar(200),
 tel_cam varchar(10),
 pwd_cam varchar(30),
+fec_ult_ing date,
 primary key (cod_cam)
 );
 
@@ -121,6 +130,28 @@ des_est varchar(200),
 primary key(cod_pro, cod_est)
 );
 
+create table tb_documento
+(
+cod_doc int auto_increment not null,
+cod_pro int not null, -- ref proyecto
+nom_doc varchar(20),
+des_doc varchar(300),
+cod_tipo_doc int, -- ref tipo_doc
+adjunto longblob,
+primary key(cod_doc)
+);
+
+create table tb_modificacion
+(
+cod_pro int not null, -- ref proyecto
+cod_mod int not null, -- autincrementado
+cod_cam char(10) not null, -- ref camarada
+cod_act int not null, -- ref actividad
+atendido int not null,
+com_mod varchar(300),
+primary key (cod_pro, cod_mod)
+);
+
 create table tb_proyecto_integrante
 (
 cod_pro int not null, -- ref proyecto
@@ -146,33 +177,7 @@ seleccionado int,
 primary key (cod_tema)
 );
 
-create table tb_modificacion
-(
-cod_pro int not null, -- ref proyecto
-cod_mod int not null, -- autincrementado
-cod_cam char(10) not null, -- ref camarada
-cod_act int not null, -- ref actividad
-atendido int not null,
-com_mod varchar(300),
-primary key (cod_pro, cod_mod)
-);
 
-create table tb_tipo_documento
-(
-cod_tipo_doc int auto_increment not null,
-des_tipo_doc varchar(20),
-primary key (cod_tipo_doc)
-);
-create table tb_documento
-(
-cod_doc int auto_increment not null,
-cod_pro int not null, -- ref proyecto
-nom_doc varchar(20),
-des_doc varchar(300),
-cod_tipo_doc int, -- ref tipo_doc
-adjunto longblob,
-primary key(cod_doc)
-);
 -- --------------------------------------------------------------------------------------------------
 -- ------------------------------------ DEPENDENCIAS ------------------------------------------------
 -- --------------------------------------------------------------------------------------------------
@@ -222,6 +227,10 @@ add constraint fk_mod_act foreign key (cod_pro,cod_act) references tb_actividad 
 
 alter table tb_documento
 add constraint fk_doc_pro foreign key (cod_pro) references tb_proyecto (cod_pro);
+
+alter table tb_proyecto
+add constraint uq_llave_pro unique (llave);
+
 
 set foreign_key_checks=1;
 SHOW ENGINE INNODB STATUS;
@@ -328,5 +337,5 @@ DELIMITER ;
 
 
 use bd_agenda_comunista;
-select * from tb_proyecto;
+select count(*) from tb_proyecto;
 select * from tb_vista;
