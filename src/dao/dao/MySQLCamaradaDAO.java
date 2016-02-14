@@ -51,6 +51,45 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 		
 		return lista;
 	}
+	
+	@Override
+	public HashMap<String, CamaradaDTO> listarCamaradas(Connection con, int cod_pro) throws Exception {
+		
+		Connection cn = null;
+		ResultSet rs = null;
+		String sql = "";
+		HashMap<String, CamaradaDTO> lista = null;
+		
+		try{
+
+			cn = MySQLConexion.getConexion(DAOFactory.bd, con);
+			
+			sql = "select c.* from tb_camarada c inner join tb_proyecto_integrante pi "
+					+ "on c.cod_cam = pi.cod_cam "
+					+ "inner join tb_proyecto p "
+					+ "on pi.cod_pro = p.cod_pro "
+					+ "where cod_pro = ?";
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, cod_pro);
+			
+			rs = pst.executeQuery();
+			
+			
+			lista = new HashMap<String, CamaradaDTO>();
+			CamaradaDTO c;
+			
+			while(rs.next()){
+				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				lista.put(c.getCod_cam(), c);
+			}
+			
+		}catch(Exception e){
+			System.out.println("Error al listar camaradas por proyecto. /* MySQLCamaradaDAO */");
+			throw e;
+		}
+		
+		return lista;
+	}
 
 	@Override
 	public int grabarCamarada(Connection con, CamaradaDTO cam) throws Exception {

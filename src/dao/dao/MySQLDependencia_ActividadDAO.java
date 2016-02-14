@@ -32,7 +32,9 @@ public class MySQLDependencia_ActividadDAO implements Dependencia_ActividadDAO{
 		ArrayList<Dependencia_ActividadDTO> lista = null;
 		
 		try{
-			sql = "select a1.*, a2.cod_act, a2.cod_est from tb_dependencia_actividad a1 inner join tb_actividad a2 on a1.cod_act = a2.cod_act where cod_pro = ? and cod_act_dep = ?";
+			sql = "select a1.*, a2.cod_act, a2.cod_est from tb_dependencia_actividad a1 inner join tb_actividad a2 "
+					+ "on a1.cod_act = a2.cod_act "
+					+ "where cod_pro = ? and cod_act_dep = ?";
 			PreparedStatement pst = cn.prepareStatement(sql);
 			
 			pst.setInt(1, cod_pro);

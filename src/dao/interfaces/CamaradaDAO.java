@@ -8,6 +8,7 @@ import dao.beans.CamaradaDTO;
 public interface CamaradaDAO {
 	
 	public HashMap<String, CamaradaDTO> listarCamaradas(Connection cn) throws Exception;
+	public HashMap<String, CamaradaDTO> listarCamaradas(Connection cn, int cod_pro) throws Exception;
 	public int grabarCamarada(Connection cn,CamaradaDTO cam) throws Exception;
 	public CamaradaDTO obtenerCamarada(Connection cn, String codigo) throws Exception;
 	public int modificarCamarada(Connection cn,CamaradaDTO cam) throws Exception;
