@@ -20,6 +20,8 @@ public class ModeloLogueo {
 			
 			if(cam.getPwd_cam().equals(password)){
 				ok = true;
+				cam.setFec_ult_ing("hoy");
+				sMantenimiento.modificarCamarada(null, cam);
 			}
 			
 		}catch(Exception e){
