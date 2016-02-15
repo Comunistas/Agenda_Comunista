@@ -1,6 +1,7 @@
 package mvc.models;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -34,7 +35,7 @@ public class ModeloProyecto {
 		try{
 			
 			p.generarLlave();
-			sMantenimiento.grabarProyecto(null, p);
+			ok = sMantenimiento.grabarProyecto(null, p);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -47,11 +48,8 @@ public class ModeloProyecto {
 	public int cargarProyectos(CamaradaDTO cam){
 		int ok = 0;
 		try {
-			
-			Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
-			
-			listaProyectos = sMantenimiento.listarProyectos(cn, cam);
-			
+						
+			listaProyectos = sMantenimiento.listarProyectos(null, cam);
 			
 			ok=1;
 		} catch (Exception e) {
@@ -65,9 +63,9 @@ public class ModeloProyecto {
 		
 		int ok = 0;
 		int cod_pro = p.getCod_pro();
-		
+		Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
+
 		try{
-			Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
 			
 			proyecto = p;
 			listaCamaradas = sMantenimiento.listarCamaradas(cn, p.getCod_pro());
@@ -79,6 +77,12 @@ public class ModeloProyecto {
 		}catch(Exception e){
 			e.printStackTrace();
 			return 0;
+		}finally{
+			try {
+				cn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return ok;
@@ -91,10 +95,8 @@ public class ModeloProyecto {
 		
 		try{
 			
-			Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
-			sMantenimiento.modificarProyecto(cn, p);
+			ok = sMantenimiento.modificarProyecto(null, p);
 			
-			ok=1;
 		}catch(Exception e){
 			e.printStackTrace();
 			return 0;
@@ -108,10 +110,8 @@ public class ModeloProyecto {
 		ProyectoDTO pro;
 		
 		try{
-			
-			Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
-			
-			if((pro = sMantenimiento.obtenerProyecto(cn, llave))!=null){
+						
+			if((pro = sMantenimiento.obtenerProyecto(null, llave))!=null){
 				ok = 1;
 				
 				ok = cargarDatosPaginaInicio(pro);
