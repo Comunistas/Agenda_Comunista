@@ -40,7 +40,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			CamaradaDTO c;
 			
 			while(rs.next()){
-				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), "", rs.getString(6),false);
 				lista.put(c.getCod_cam(), c);
 			}
 			
@@ -79,7 +79,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			CamaradaDTO c;
 			
 			while(rs.next()){
-				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				c = new CamaradaDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), "", rs.getString(6),false);
 				lista.put(c.getCod_cam(), c);
 			}
 			
@@ -137,7 +137,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 					+ "ape_cam = ?,"
 					+ "tel_cam = ?,"
 					+ "pwd_cam = ?,"
-					+ "fec_ult_ing = ?,"
+					+ "fec_ult_ing = ? "
 					+ "where cod_cam = ?";
 			
 			PreparedStatement pst = cn.prepareStatement(sql);
@@ -204,11 +204,11 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 			rs = pst.executeQuery();
 			
 			if(rs.next()){
-				cam = new CamaradaDTO(codigo, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				cam = new CamaradaDTO(codigo, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),true);
 			}
 			
 			if(cam==null)
-				throw new Exception("No se ha encontrado a ese camarada");
+				throw new Exception("No se ha encontrado a ese camarada.");
 		}catch(Exception e){
 			imprimirError("Error al obtener camarada.");
 			throw e;
