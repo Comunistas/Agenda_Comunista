@@ -338,4 +338,4 @@ DELIMITER ;
 
 use bd_agenda_comunista;
 select count(*) from tb_proyecto;
-select * from tb_vista;
+select * from tb_camarada;

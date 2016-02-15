@@ -12,6 +12,16 @@ public class CamaradaDTO {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	
 	public CamaradaDTO(String cod_cam, String nom_cam, String ape_cam,
+			String tel_cam, String pwd_cam, String fec_ult_ing) {
+		this.cod_cam = cod_cam;
+		this.nom_cam = nom_cam;
+		this.ape_cam = ape_cam;
+		this.tel_cam = tel_cam;
+		this.pwd_cam = pwd_cam;
+		setFec_ult_ing(fec_ult_ing);
+	}
+	
+	public CamaradaDTO(String cod_cam, String nom_cam, String ape_cam,
 			String tel_cam, String pwd_cam, Date fec_ult_ing) {
 		this.cod_cam = cod_cam;
 		this.nom_cam = nom_cam;
@@ -67,7 +77,7 @@ public class CamaradaDTO {
 
 	public void setFec_ult_ing(String fec_ult_ing) {
 		if(fec_ult_ing.equalsIgnoreCase("hoy")){
-			this.fec_ult_ing = sdf.format(Calendar.getInstance());
+			this.fec_ult_ing = sdf.format(Calendar.getInstance().getTime());
 		}else
 			this.fec_ult_ing = fec_ult_ing;
 	}
