@@ -20,11 +20,15 @@ public class ModeloLogueo {
 		try{
 			cam = sMantenimiento.obtenerCamarada(null, codigo);
 			
+			if(cam.isPwdEncriptado())
+				cam.desencriptarPwd();
+			
 			if(cam.getPwd_cam().equals(password)){
 				ok = true;
 				
 				
 				cam.setFec_ult_ing("hoy");
+				
 				int hola = sMantenimiento.modificarCamarada(null, cam);
 				
 				

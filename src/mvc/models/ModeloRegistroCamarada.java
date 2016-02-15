@@ -13,6 +13,9 @@ public class ModeloRegistroCamarada {
 		
 		try{
 			
+			if(!cam.isPwdEncriptado())
+				cam.encriptarPwd();
+			
 			ok = sMantenimiento.grabarCamarada(null, cam);
 			
 		}catch(Exception e){

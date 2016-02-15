@@ -156,13 +156,16 @@ public class CamaradaDTO {
 	public void encriptarPwd(){
 		
 		pwd_cam = base64encode(xorMessage(pwd_cam, "MICULO"));
+		System.out.println(pwd_cam);
 		setPwdEncriptado(true);
 		
 	}
 	
 	public void desencriptarPwd(){
 		
-		pwd_cam = base64decode(xorMessage(pwd_cam, "MICULO"));
+		pwd_cam = base64decode(pwd_cam);
+		pwd_cam = xorMessage(pwd_cam, "MICULO");
+		System.out.println(pwd_cam);
 		setPwdEncriptado(false);
 
 		

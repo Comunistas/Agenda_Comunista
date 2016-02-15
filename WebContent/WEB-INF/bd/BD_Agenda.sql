@@ -42,7 +42,7 @@ cod_cam char(10) not null,
 nom_cam varchar(200),
 ape_cam varchar(200),
 tel_cam varchar(10),
-pwd_cam varchar(30),
+pwd_cam varchar(50),
 fec_ult_ing date,
 primary key (cod_cam)
 );

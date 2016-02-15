@@ -98,6 +98,8 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 		int rs = 0;
 		String sql = "";
 		
+		if(!cam.isPwdEncriptado())
+			cam.encriptarPwd();
 		
 		try{
 			
@@ -129,6 +131,8 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 		int rs = 0;
 		String sql = "";
 		
+		if(!cam.isPwdEncriptado())
+			cam.encriptarPwd();
 		
 		try{
 			
