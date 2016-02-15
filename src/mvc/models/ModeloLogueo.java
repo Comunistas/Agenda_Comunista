@@ -11,17 +11,25 @@ public class ModeloLogueo {
 	
 	private CamaradaDTO cam = null;
 	private Cookie cookieLogueado = null, cookiePwd = null, cookieRecordar = null;
+	boolean recordar=false;
 	
 	public boolean pwdValido(String codigo, String password, boolean recordar){
 		boolean ok = false;
+		this.recordar = recordar;
 		
 		try{
 			cam = sMantenimiento.obtenerCamarada(null, codigo);
 			
 			if(cam.getPwd_cam().equals(password)){
 				ok = true;
+				
+				
 				cam.setFec_ult_ing("hoy");
-				sMantenimiento.modificarCamarada(null, cam);
+				int hola = sMantenimiento.modificarCamarada(null, cam);
+				
+				
+				if(hola==0)
+					ok = false;
 			}
 			
 		}catch(Exception e){
@@ -34,7 +42,7 @@ public class ModeloLogueo {
 
 	
 	
-	public void crearCookieLogueado(){
+	private void crearCookieLogueado(){
 		
 		cookieLogueado = new Cookie("logueado", cam.getCod_cam());
 		
@@ -46,20 +54,22 @@ public class ModeloLogueo {
 		
 	}
 	
-	public void crearCookiePwd(){
+	private void crearCookiePwd(){
 		
 		cookiePwd = new Cookie("recordarPwd", cam.getPwd_cam());
 
-		cookiePwd.setMaxAge(60*60*24*365);
+		if(recordar) cookiePwd.setMaxAge(60*60*24*365);
+		else cookiePwd.setMaxAge(0);
 		
 		cookiePwd.setPath("/");
 	}
 	
-	public void crearCookieRecordar(){
+	private void crearCookieRecordar(){
 		
 		cookieRecordar = new Cookie("recordarUsuario", cam.getCod_cam());
 
-		cookieRecordar.setMaxAge(60*60*24*365);
+		if(recordar) cookieRecordar.setMaxAge(60*60*24*365);
+		else cookieRecordar.setMaxAge(0);
 		
 		cookieRecordar.setPath("/");
 	}
@@ -86,4 +96,10 @@ public class ModeloLogueo {
 		return cookieRecordar;
 		
 	}
+
+	public CamaradaDTO getCamarada() {
+		return cam;
+	}
+
+	
 }
