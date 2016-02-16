@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import dao.beans.CamaradaDTO;
 import dao.beans.PerfilDTO;
 import dao.beans.Proyecto_IntegranteDTO;
 import dao.interfaces.Proyecto_IntegranteDAO;
@@ -101,6 +103,40 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 	
 	public static String nombreClase(){
 		return "/* MySQLProyecto_IntegranteDAO */";
+	}
+
+	@Override
+	public HashMap<Integer, Proyecto_IntegranteDTO> listarIntegrantesPorCamarada(Connection con, CamaradaDTO cam) throws Exception {
+
+		Connection cn = null;
+		ResultSet rs = null;
+		String sql = "";
+		HashMap<Integer,Proyecto_IntegranteDTO> lista = null;
+		
+		try{
+			
+			cn = MySQLConexion.getConexion(DAOFactory.bd,con);
+			sql = "select pi.*, p.des_per from tb_proyecto_integrante pi inner join tb_perfil p "
+					+ "on pi.cod_per = p.cod_per"
+					+ " where cod_cam = ?";
+			
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, cam.getCod_cam());
+			
+			rs = pst.executeQuery();
+			
+			lista = new HashMap<Integer, Proyecto_IntegranteDTO>();
+			Proyecto_IntegranteDTO pi;
+			while(rs.next()){
+				pi = new Proyecto_IntegranteDTO(rs.getInt(1), rs.getString(2), new PerfilDTO(rs.getInt(3), rs.getString(5)), rs.getInt(4));
+				lista.put(pi.getCod_pro(), pi);
+			}
+			
+			
+		}catch(Exception e){
+			imprimirError("Error al listar proyecto_integrante, por camarada");
+		}
+		return lista;
 	}
 
 }

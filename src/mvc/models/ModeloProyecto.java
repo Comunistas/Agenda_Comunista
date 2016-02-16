@@ -24,6 +24,7 @@ public class ModeloProyecto {
 	ArrayList<Proyecto_IntegranteDTO> listaIntegrantes;
 	TreeMap<Integer, ProyectoDTO> listaProyectos;
 	HashMap<Integer, ComentarioDTO> listaComentarios;
+	HashMap<Integer, Proyecto_IntegranteDTO> listaIntegrantePorProyectos;
 	ProyectoDTO proyecto;
 	
 	

@@ -207,6 +207,9 @@ public class MantenimientoService {
 	public ArrayList<Proyecto_IntegranteDTO> listarIntegrantes(Connection cn,int cod_pro) throws Exception{
 		return objProyecto_IntegranteDAO.listarIntegrantes(cn, cod_pro);
 	}
+	public HashMap<Integer, Proyecto_IntegranteDTO> listarIntegrantesPorCamarada(Connection cn, CamaradaDTO cam) throws Exception {
+		return objProyecto_IntegranteDAO.listarIntegrantesPorCamarada(cn, cam);
+	}
 	public int grabarIntegrante(Connection cn,Proyecto_IntegranteDTO pi) throws Exception{
 		return objProyecto_IntegranteDAO.grabarIntegrante(cn, pi);
 	}
