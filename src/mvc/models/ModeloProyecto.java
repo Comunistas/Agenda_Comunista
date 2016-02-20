@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import dao.beans.ActividadDTO;
 import dao.beans.CamaradaDTO;
 import dao.beans.ComentarioDTO;
+import dao.beans.PerfilDTO;
 import dao.beans.ProyectoDTO;
 import dao.beans.Proyecto_IntegranteDTO;
 import dao.dao.DAOFactory;
@@ -24,19 +25,24 @@ public class ModeloProyecto {
 	ArrayList<Proyecto_IntegranteDTO> listaIntegrantes;
 	TreeMap<Integer, ProyectoDTO> listaProyectos;
 	HashMap<Integer, ComentarioDTO> listaComentarios;
-	HashMap<Integer, Proyecto_IntegranteDTO> listaIntegrantePorProyectos;
+	HashMap<Integer, Proyecto_IntegranteDTO> listaIntegrantesPorCamarada;
+	ArrayList<PerfilDTO> listaPerfiles;
 	ProyectoDTO proyecto;
+	String llave;
 	
 	
 	
-	public int crearNuevoProyecto(ProyectoDTO p){
+	public int grabarNuevoProyecto(ProyectoDTO pro, CamaradaDTO cam, PerfilDTO p){
 		
 		int ok = 0;
 		
 		try{
 			
-			p.generarLlave();
-			ok = sMantenimiento.grabarProyecto(null, p);
+			
+			pro.generarLlave();
+			ok = sMantenimiento.grabarProyectoCoordinador(pro, cam, p);
+			
+			llave = pro.getLlave();
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -50,7 +56,11 @@ public class ModeloProyecto {
 		int ok = 0;
 		try {
 						
-			listaProyectos = sMantenimiento.listarProyectos(null, cam);
+			Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
+			
+			listaProyectos = sMantenimiento.listarProyectos(cn, cam);
+			listaIntegrantesPorCamarada = sMantenimiento.listarIntegrantesPorCamarada(cn, cam);
+			listaPerfiles = sMantenimiento.listarPerfiles(cn);
 			
 			ok=1;
 		} catch (Exception e) {
@@ -150,6 +160,13 @@ public class ModeloProyecto {
 		return proyecto;
 	}
 	
-	
-	
+	public HashMap<Integer, Proyecto_IntegranteDTO> getListaIntegrantesPorCamarada(){
+		return listaIntegrantesPorCamarada;
+	}
+	public String getLlave(){
+		return llave;
+	}
+	public ArrayList<PerfilDTO> getListaPerfiles(){
+		return listaPerfiles;
+	}
 }

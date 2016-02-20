@@ -12,7 +12,6 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
-  
   <servlet>
     <servlet-name>registrarCamarada</servlet-name>
     <servlet-class>mvc.controllers.servlets.ServletRegistroCamarada</servlet-class>
@@ -21,7 +20,6 @@
     <servlet-name>registrarCamarada</servlet-name>
     <url-pattern>/registrarCamarada</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>logueo</servlet-name>
     <servlet-class>mvc.controllers.servlets.ServletLogueo</servlet-class>
@@ -29,5 +27,21 @@
   <servlet-mapping>
     <servlet-name>logueo</servlet-name>
     <url-pattern>/logueo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>cargarProyectos</servlet-name>
+    <servlet-class>mvc.controllers.servlets.ServletCargarProyectos</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cargarProyectos</servlet-name>
+    <url-pattern>/cargarProyectos</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>grabarNuevoProyecto</servlet-name>
+    <servlet-class>mvc.controllers.servlets.ServletGrabarNuevoProyecto</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>grabarNuevoProyecto</servlet-name>
+    <url-pattern>/grabarNuevoProyecto</url-pattern>
   </servlet-mapping>
 </web-app>

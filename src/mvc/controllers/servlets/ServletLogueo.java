@@ -21,8 +21,11 @@ public class ServletLogueo extends HttpServlet {
 		
 		if(ok==0){
 			rq.setAttribute("msjLogueo", "No se pudo loguear");
+			rq.getRequestDispatcher("paginas/login.jsp").forward(rq, res);
+
 		}else{
 			rq.setAttribute("msjLogueo", "¡Logueado!");
+			rq.getRequestDispatcher("cargarProyectos").forward(rq, res);
 		}
 		
 		rq.getRequestDispatcher("paginas/login.jsp").forward(rq, res);
