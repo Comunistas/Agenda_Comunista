@@ -20,6 +20,8 @@ public class MySQLTransaccionDAO implements TransaccionDAO{
 		Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
 		try{
 			
+			cn.setAutoCommit(false);
+			
 			ok=sMantenimiento.grabarProyecto(cn, pro);
 			if(ok==0) return ok;
 			
@@ -29,6 +31,8 @@ public class MySQLTransaccionDAO implements TransaccionDAO{
 			
 			ok = sMantenimiento.grabarIntegrante(cn, pi);
 			
+			cn.commit();
+			cn.setAutoCommit(true);
 		}catch(Exception e){
 			throw e;
 		}
