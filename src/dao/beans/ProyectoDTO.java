@@ -55,13 +55,15 @@ public class ProyectoDTO {
 	public void setLlave(String llave) {
 		this.llave = llave;
 	}
-	
+
 	public String getFec_ini_pro() {
 		return fec_ini_pro;
 	}
 
 	public void setFec_ini_pro(String fec_ini_pro) {
-		if (fec_ini_pro.equalsIgnoreCase("hoy")) {
+		if (fec_ini_pro == null)
+			this.fec_ini_pro = null;
+		else if (fec_ini_pro.equalsIgnoreCase("hoy")) {
 			this.fec_ini_pro = sdf.format(Calendar.getInstance().getTime());
 		} else
 			this.fec_ini_pro = fec_ini_pro;
@@ -72,7 +74,9 @@ public class ProyectoDTO {
 	}
 
 	public void setFec_lim_pro(String fec_lim_pro) {
-		if (fec_lim_pro.equalsIgnoreCase("hoy")) {
+		if (fec_lim_pro == null)
+			this.fec_lim_pro = null;
+		else if (fec_lim_pro.equalsIgnoreCase("hoy")) {
 			this.fec_lim_pro = sdf.format(Calendar.getInstance().getTime());
 		} else
 			this.fec_lim_pro = fec_lim_pro;
@@ -84,63 +88,65 @@ public class ProyectoDTO {
 	}
 
 	public void setFec_fin_pro(String fec_fin_pro) {
-		if (fec_fin_pro.equalsIgnoreCase("hoy")) {
+		if (fec_fin_pro == null)
+			this.fec_fin_pro = null;
+		else if (fec_fin_pro.equalsIgnoreCase("hoy")) {
 			this.fec_fin_pro = sdf.format(Calendar.getInstance().getTime());
 		} else
 			this.fec_fin_pro = fec_fin_pro;
 	}
 
-	
-	
-
-
 	// Metodos de fechas
 	public void setFec_ini_pro(Date fec_ini_pro) {
+		if (fec_ini_pro == null)
+			this.fec_ini_pro = null;
 		this.fec_ini_pro = sdf.format(fec_ini_pro);
 	}
 
 	public void setFec_lim_pro(Date fec_lim_pro) {
+		if (fec_lim_pro == null)
+			this.fec_lim_pro = null;
 		this.fec_lim_pro = sdf.format(fec_lim_pro);
 	}
 
 	public void setFec_fin_pro(Date fec_fin_pro) {
+		if (fec_fin_pro == null)
+			this.fec_fin_pro = null;
 		this.fec_fin_pro = sdf.format(fec_fin_pro);
 	}
 
-	
-	
-	public void generarLlave(){
+	public void generarLlave() {
 		StringBuffer text = new StringBuffer();
-		
+
 		int nl = 0;
 		int i = 0;
-		
-		do{
-			if(nl==0){
-				text.append((char)generarCaracterDeLetra());
-			}else{
+
+		do {
+			if (nl == 0) {
+				text.append((char) generarCaracterDeLetra());
+			} else {
 				text.append(generarNumero());
 			}
-			
-			nl = (int)(Math.random()*2+0);
-			
+
+			nl = (int) (Math.random() * 2 + 0);
+
 			i++;
-		}while(i<50);
-		
+		} while (i < 50);
+
 		llave = text.toString();
 	}
 
-	private int generarCaracterDeLetra(){
+	private int generarCaracterDeLetra() {
 		int numero = 0;
 		Random r = new Random();
-		
-		do{
-			numero = r.nextInt(123-65) + 65;
-		}while(numero>90&&numero<97);
+
+		do {
+			numero = r.nextInt(123 - 65) + 65;
+		} while (numero > 90 && numero < 97);
 		return numero;
 	}
-	
-	private int generarNumero(){
-		return (int)(Math.random()*9+0);
+
+	private int generarNumero() {
+		return (int) (Math.random() * 9 + 0);
 	}
 }

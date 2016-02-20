@@ -16,6 +16,7 @@ import dao.interfaces.Proyecto_IntegranteDAO;
 import dao.interfaces.TemaDAO;
 import dao.interfaces.TipoDatoDAO;
 import dao.interfaces.TipoDocumentoDAO;
+import dao.interfaces.TransaccionDAO;
 import dao.interfaces.VariableDAO;
 import dao.interfaces.VistaDAO;
 
@@ -49,5 +50,6 @@ public abstract class DAOFactory {
 	public abstract ModificacionDAO getModificacionDAO();
 	public abstract DocumentoDAO getDocumentoDAO();
 	public abstract TipoDocumentoDAO getTipoDocumentoDAO();
+	public abstract TransaccionDAO getTransaccionDAO();
 	
 }

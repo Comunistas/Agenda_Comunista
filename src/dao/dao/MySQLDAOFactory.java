@@ -16,6 +16,7 @@ import dao.interfaces.Proyecto_IntegranteDAO;
 import dao.interfaces.TemaDAO;
 import dao.interfaces.TipoDatoDAO;
 import dao.interfaces.TipoDocumentoDAO;
+import dao.interfaces.TransaccionDAO;
 import dao.interfaces.VariableDAO;
 import dao.interfaces.VistaDAO;
 
@@ -109,6 +110,12 @@ public class MySQLDAOFactory extends DAOFactory{
 	@Override
 	public TipoDocumentoDAO getTipoDocumentoDAO() {
 		return new MySQLTipoDocumentoDAO();
+	}
+
+	@Override
+	public TransaccionDAO getTransaccionDAO() {
+		
+		return new MySQLTransaccionDAO();
 	}
 
 }

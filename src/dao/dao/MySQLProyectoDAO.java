@@ -90,13 +90,14 @@ public class MySQLProyectoDAO implements ProyectoDAO{
 		String sql = "";
 		
 		try{
-			sql = "insert tb_proyecto values (0,?,?,?,?)";
+			sql = "insert tb_proyecto values (0,?,?,?,?,?)";
 			PreparedStatement pst = cn.prepareStatement(sql);
 			
 			pst.setString(1, pro.getNom_pro());
 			pst.setString(2, pro.getFec_ini_pro());
 			pst.setString(3, pro.getFec_lim_pro());
 			pst.setString(4, pro.getFec_fin_pro());
+			pst.setString(5, pro.getLlave());
 			
 			rs = pst.executeUpdate();
 			

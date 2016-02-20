@@ -32,6 +32,7 @@ public class MantenimientoService {
 	ModificacionDAO objModificacionDAO = f.getModificacionDAO();
 	DocumentoDAO objDocumentoDAO = f.getDocumentoDAO();
 	TipoDocumentoDAO objTipoDocumentoDAO = f.getTipoDocumentoDAO();
+	TransaccionDAO objTransaccionDAO = f.getTransaccionDAO();
 	
 	/*
 	 * ActividadDAO
@@ -273,6 +274,13 @@ public class MantenimientoService {
 	}
 	public TipoDocumentoDTO obtenerTipoDocumento(Connection con, int codigo) throws Exception{
 		return objTipoDocumentoDAO.obtenerTipoDocumento(con, codigo);
+	}
+	
+	/*
+	 * TransaccionDAO
+	 */
+	public int grabarProyectoCoordinador(ProyectoDTO pro, CamaradaDTO cam, PerfilDTO p) throws Exception{
+		return objTransaccionDAO.grabarProyectoCoordinador(pro, cam, p);
 	}
 	
 	/*
