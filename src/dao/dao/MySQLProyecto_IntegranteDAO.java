@@ -68,7 +68,7 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 			rs = pst.executeUpdate();
 			
 		}catch(Exception e){
-			imprimirError("Error al grabar integrante"+pi.getCod_cam()+" de proyecto.");
+			imprimirError("Error al grabar integrante "+pi.getCod_cam()+" de proyecto.");
 		}
 		
 		return rs;
