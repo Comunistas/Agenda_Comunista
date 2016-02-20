@@ -28,7 +28,6 @@ public class ServletLogueo extends HttpServlet {
 			rq.getRequestDispatcher("cargarProyectos").forward(rq, res);
 		}
 		
-		rq.getRequestDispatcher("paginas/login.jsp").forward(rq, res);
 	}
 	
 	private int loguearse(HttpServletRequest rq, HttpServletResponse res){
