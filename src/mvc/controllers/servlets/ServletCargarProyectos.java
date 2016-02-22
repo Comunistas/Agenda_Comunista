@@ -53,6 +53,7 @@ public class ServletCargarProyectos extends HttpServlet {
 		TreeMap<Integer,ProyectoDTO> listaProyectos = m.getListaProyectos();
 		ArrayList<PerfilDTO> listaPerfiles = m.getListaPerfiles();
 		
+		
 		rq.setAttribute("listaProyectosPorCamarada", listaProyectos);
 		rq.setAttribute("integrante", listaIntegrantesPorCamarada);
 		sesion.setAttribute("listaPerfiles", listaPerfiles);
