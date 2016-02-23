@@ -226,7 +226,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 	}
 	
 	public static String nombreClase(){
-		return "/* MySQLEstadoDAO */";
+		return "/* MySQLCamaradaDAO */";
 	}
 	
 }
