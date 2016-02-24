@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>ProyectoLPII_VLAD</display-name>
+  <display-name>Agenda Comunista</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -20,39 +20,5 @@
   <servlet-mapping>
     <servlet-name>mvc-dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
-  </servlet-mapping>
-  
-  
-  <servlet>
-    <servlet-name>registrarCamarada</servlet-name>
-    <servlet-class>mvc.controllers.servlets.ServletRegistroCamarada</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>registrarCamarada</servlet-name>
-    <url-pattern>/registrarCamarada</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>logueo</servlet-name>
-    <servlet-class>mvc.controllers.servlets.ServletLogueo</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>logueo</servlet-name>
-    <url-pattern>/logueo</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>cargarProyectos</servlet-name>
-    <servlet-class>mvc.controllers.servlets.ServletCargarProyectos</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>cargarProyectos</servlet-name>
-    <url-pattern>/cargarProyectos</url-pattern>
-  </servlet-mapping>
-    <servlet>
-    <servlet-name>grabarNuevoProyecto</servlet-name>
-    <servlet-class>mvc.controllers.servlets.ServletGrabarNuevoProyecto</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>grabarNuevoProyecto</servlet-name>
-    <url-pattern>/grabarNuevoProyecto</url-pattern>
   </servlet-mapping>
 </web-app>
