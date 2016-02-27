@@ -18,11 +18,11 @@ import dao.beans.Proyecto_IntegranteDTO;
 import mvc.models.ModeloProyecto;
 
 /**
- * Servlet implementation class ServletCargarProyectos
+ * Servlet implementation class CargarProyectosController
  */
 
 @Controller
-public class ServletCargarProyectos{
+public class CargarProyectosController{
        
 	
 	ModeloProyecto m = new ModeloProyecto();
