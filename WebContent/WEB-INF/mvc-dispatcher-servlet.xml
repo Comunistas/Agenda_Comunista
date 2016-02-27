@@ -1,18 +1,29 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		
+		
+	<bean name="HandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
-    <bean name="/welcome.htm" 
-		class="com.mkyong.common.controller.HelloWorldController" />
-		
-		
-	<bean name="login" class="mvc.controllers.LoginController" />
+	<!-- Para que se detecte @Controller y se utilicen como tales en el paquete indicado -->
+	<context:component-scan base-package="mvc.controllers" />
+	<!-- Permite redireccionar los requests a los controladores -->
+	<mvc:annotation-driven/>
+	<context:annotation-config/>
+
 	
     <bean id="viewResolver"
     	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">
-            <value>/paginas/</value>
+            <value>/paginas</value>
         </property>
         <property name="suffix">
             <value>.jsp</value>

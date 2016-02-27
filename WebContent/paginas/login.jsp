@@ -8,26 +8,27 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath }/logueo" method="post">
+<form action="loginResult" method="post">
 
 <table>
 	<tr><th colspan="2"><h2>Logueo</h2></th></tr>
 	<tr>
 		<td>Código  : </td>
-		<td><input type="text" placeholder="Juanchito" name="codigo"></td>
+		<td><input type="text" placeholder="Juanchito" name="cod_cam"></td>
 	</tr>
 	<tr>
 		<td>Contraseña  : </td>
-		<td><input type="password" placeholder="P@ssword" name="password"></td>
+		<td><input type="password" placeholder="P@ssword" name="pwd_cam"></td>
 	</tr>
 	<tr>
 		<td><label><input type="checkbox" value="si" name="recordarme">&emsp;Recordarme&emsp;&emsp;</label></td>
 		<td><input type="submit" value="Enviar"></td>
 	</tr>
+	
 </table>
-
+<input type="hidden" name="encriptado" value="false">
 </form>
-<a href="${pageContext.request.contextPath }/paginas/registro.jsp">No estoy registrado</a><br>
+<a href="${pageContext.request.contextPath }/registro">No estoy registrado</a><br>
 ${msjLogueo }<br>
 ${sessionScope.camaradaLogueado.fec_ult_ing } ${sessionScope.camaradaLogueado.nom_cam } ${sessionScope.camaradaLogueado.ape_cam }
 </body>
