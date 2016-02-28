@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.beans.CamaradaDTO;
@@ -23,19 +26,22 @@ import mvc.models.ModeloProyecto;
 
 @Controller
 public class CargarProyectosController{
-       
 	
-	ModeloProyecto m = new ModeloProyecto();
+	ModeloProyecto m;
+	
+	@ModelAttribute("modelo")
+	public ModeloProyecto instanciarModelo(){
+		m=new ModeloProyecto();
+		return m;
+	}
 	
 	@RequestMapping("/cargarProyectos")
-	public ModelAndView servicio(HttpServletRequest rq) throws Exception {
+	public ModelAndView servicio(HttpSession sesion, Model modelo, @ModelAttribute("modelo") ModeloProyecto modeloProyecto) throws Exception {
 		
 		
-		HttpSession sesion = rq.getSession();
 		ModelAndView mav = new ModelAndView("/proyectos");
-		int ok = cargarProyectos(sesion, mav);
-		
-		
+		int ok = cargarProyectos(sesion, modelo,modeloProyecto);
+
 		if(ok==0){
 			mav.addObject("msjCargarProyectos", "Error al cargar proyectos.");
 		}
@@ -44,24 +50,17 @@ public class CargarProyectosController{
 		
 	}
 	
-	private int cargarProyectos(HttpSession sesion, ModelAndView mav){
+	private int cargarProyectos(HttpSession sesion, Model modelo, ModeloProyecto m){
 		int ok = 0;
-		
-		
 		CamaradaDTO cam = (CamaradaDTO)sesion.getAttribute("camaradaLogueado");
+
 		
 		if(cam==null) return 0;
 		
 		ok = m.cargarProyectos(cam);
 		
-		HashMap<Integer, Proyecto_IntegranteDTO> listaIntegrantesPorCamarada = m.getListaIntegrantesPorCamarada();
-		TreeMap<Integer,ProyectoDTO> listaProyectos = m.getListaProyectos();
-		ArrayList<PerfilDTO> listaPerfiles = m.getListaPerfiles();
+		modelo.addAttribute("m", m);
 		
-		
-		mav.addObject("listaProyectosPorCamarada", listaProyectos);
-		mav.addObject("integrante", listaIntegrantesPorCamarada);
-		sesion.setAttribute("listaPerfiles", listaPerfiles);
 		
 		return ok;
 	}
