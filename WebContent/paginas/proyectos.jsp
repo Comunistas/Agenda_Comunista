@@ -35,7 +35,7 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href="${pageContext.request.contextPath }/paginas/nuevo_proyecto.jsp">Crear nuevo proyecto</a><br>
+<a href="${pageContext.request.contextPath }/nuevoProyecto">Crear nuevo proyecto</a><br>
 ${msjCargarProyectos }<br>
 ${msjGrabarProyecto }<br>
 ${llave!=null ? 'Con esta llave tus amigos podrán unirse al proyecto que has creado: ' : '' }${llave}

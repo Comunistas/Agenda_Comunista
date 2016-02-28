@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Crear un nuevo proyecto</title>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/jquery-ui.css">
-<script src="${pageContext.request.contextPath }/js/jquery-2.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
+<link href="<c:url value='/recursos/css/jquery-ui.css' />" rel="stylesheet" />
+<script src='<c:url value="/recursos/js/jquery-2.1.1.min.js" />'></script>
+<script src='<c:url value="/recursos/js/jquery-ui.min.js" />'></script>
 
 <script>
 	$(function(){
@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath }/grabarNuevoProyecto" method="post">
+<form action="grabarNuevoProyecto" method="post">
 	<table>
 		<tr><th colspan="2">Nuevo proyecto</th></tr>
 		<tr>
@@ -44,7 +44,7 @@
 			<td>Perfil</td>
 			<td>
 				<select name="perfil">
-					<c:forEach items="${sessionScope.listaPerfiles }" var="x">
+					<c:forEach items="${listaPerfiles }" var="x">
 						<option value="${x.cod_per }">${x.des_per }</option>
 					</c:forEach>
 				</select>
