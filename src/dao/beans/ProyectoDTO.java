@@ -12,6 +12,8 @@ public class ProyectoDTO {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
+	public ProyectoDTO(){}
+	
 	public ProyectoDTO(int cod_pro, String nom_pro, String fec_ini_pro,
 			String fec_lim_pro, String fec_fin_pro, String llave) {
 		this.cod_pro = cod_pro;
@@ -61,12 +63,7 @@ public class ProyectoDTO {
 	}
 
 	public void setFec_ini_pro(String fec_ini_pro) {
-		if (fec_ini_pro == null)
-			this.fec_ini_pro = null;
-		else if (fec_ini_pro.equalsIgnoreCase("hoy")) {
-			this.fec_ini_pro = sdf.format(Calendar.getInstance().getTime());
-		} else
-			this.fec_ini_pro = fec_ini_pro;
+		this.fec_ini_pro = validarFecha(fec_ini_pro);
 	}
 
 	public String getFec_lim_pro() {
@@ -74,12 +71,7 @@ public class ProyectoDTO {
 	}
 
 	public void setFec_lim_pro(String fec_lim_pro) {
-		if (fec_lim_pro == null)
-			this.fec_lim_pro = null;
-		else if (fec_lim_pro.equalsIgnoreCase("hoy")) {
-			this.fec_lim_pro = sdf.format(Calendar.getInstance().getTime());
-		} else
-			this.fec_lim_pro = fec_lim_pro;
+		this.fec_lim_pro = validarFecha(fec_lim_pro);
 	}
 
 	public String getFec_fin_pro() {
@@ -88,12 +80,7 @@ public class ProyectoDTO {
 	}
 
 	public void setFec_fin_pro(String fec_fin_pro) {
-		if (fec_fin_pro == null)
-			this.fec_fin_pro = null;
-		else if (fec_fin_pro.equalsIgnoreCase("hoy")) {
-			this.fec_fin_pro = sdf.format(Calendar.getInstance().getTime());
-		} else
-			this.fec_fin_pro = fec_fin_pro;
+		this.fec_fin_pro = validarFecha(fec_fin_pro);
 	}
 
 	// Metodos de fechas
@@ -114,6 +101,16 @@ public class ProyectoDTO {
 			this.fec_fin_pro = null;
 		this.fec_fin_pro = sdf.format(fec_fin_pro);
 	}
+	
+	public String validarFecha(String fecha){
+		if(fecha == null || fecha.equals(""))
+			return null;
+		else if(fecha.equalsIgnoreCase("hoy")) 
+			return sdf.format(Calendar.getInstance().getTime());
+		else 
+			return fecha;
+	}
+	
 
 	public void generarLlave() {
 		StringBuffer text = new StringBuffer();

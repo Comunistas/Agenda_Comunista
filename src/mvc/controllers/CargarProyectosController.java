@@ -59,10 +59,6 @@ public class CargarProyectosController{
 		
 		ok = m.cargarProyectos(cam);
 		
-		ArrayList<PerfilDTO> listaPerfiles = m.getListaPerfiles();
-
-		sesion.setAttribute("listaPerfiles", listaPerfiles);
-		
 		modelo.addAttribute("m", m);
 		
 		
