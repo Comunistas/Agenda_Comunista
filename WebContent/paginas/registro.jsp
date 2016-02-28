@@ -8,28 +8,28 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath }/registrarCamarada" method="post">
+<form action="nuevoCamarada" method="post">
 	<table>
 		<tr><th colspan="2"><h2>Registro de Camarada</h2></th></tr>
 		<tr>
 			<td><label>Código de Cibertec: &emsp;</label></td>
-			<td><input type="text" placeholder="i2014xxxxx" name="codigo"></td>
+			<td><input type="text" placeholder="i2014xxxxx" name="cod_cam"></td>
 		</tr>
 		<tr>
 			<td><label>Nombre: </label></td>
-			<td><input type="text" placeholder="Juanchito" name="nombre"></td>
+			<td><input type="text" placeholder="Juanchito" name="nom_cam"></td>
 		</tr>
 		<tr>
 			<td><label>Apellido: </label></td>
-			<td><input type="text" placeholder="Alimaña" name="apellido"></td>
+			<td><input type="text" placeholder="Alimaña" name="ape_cam"></td>
 		</tr>
 		<tr>
 			<td><label>Teléfono: </label></td>
-			<td><input type="text" placeholder="666888777" name="telefono"></td>
+			<td><input type="text" placeholder="666888777" name="tel_cam"></td>
 		</tr>
 		<tr>
 			<td><label>Contraseña: </label></td>
-			<td><input type="password" placeholder="P@ssword" name="password"></td>
+			<td><input type="password" placeholder="P@ssword" name="pwd_cam"></td>
 		</tr>
 		<tr>
 			<td></td>
