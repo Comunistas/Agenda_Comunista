@@ -16,7 +16,7 @@
 		<th colspan="4"><center>Mis Proyectos</center></th>
 	</tr>
 	
-	<c:if test="${empty listaProyectosPorCamarada }">
+	<c:if test="${empty m.listaProyectos }">
 		<tr><td colspan="4"><center>No estás asociado a ningún proyecto</center></td></tr>
 	</c:if>
 	
@@ -26,12 +26,12 @@
 		<td>Perfil</td>
 		<td>Llave</td>
 	</tr>
-	<c:forEach items="${listaProyectosPorCamarada }" var="pro">
-		<tr class="${integrante[pro.value.cod_pro].coordinador == 1 ? 'active' : ''}">
-			<td style="width:20%">${pro.value.fec_ini_pro }</td>
-			<td style="width:30%">${pro.value.nom_pro }</td>
-			<td style="width:20%">${integrante[pro.value.cod_pro].perfil.des_per }</td>
-			<td style="width:30%">${pro.value.llave }</td>
+	<c:forEach items="${m.listaProyectos }" var="proEntry">
+		<tr class="${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].coordinador == 1 ? 'active' : ''}">
+			<td style="width:20%">${proEntry.value.fec_ini_pro }</td>
+			<td style="width:30%">${proEntry.value.nom_pro }</td>
+			<td style="width:20%">${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].perfil.des_per }</td>
+			<td style="width:30%">${proEntry.value.llave }</td>
 		</tr>
 	</c:forEach>
 </table>
