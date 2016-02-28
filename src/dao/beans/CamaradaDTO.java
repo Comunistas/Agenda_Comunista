@@ -16,8 +16,6 @@ public class CamaradaDTO {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-	public CamaradaDTO(){}
-	
 	public CamaradaDTO(String cod_cam, String nom_cam, String ape_cam,
 			String tel_cam, String pwd_cam, String fec_ult_ing, boolean encriptado) {
 		this.cod_cam = cod_cam;
