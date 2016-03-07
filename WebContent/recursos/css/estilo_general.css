@@ -1,0 +1,40 @@
+.contenido{
+	width:90%;
+}
+
+.encabezado{
+	color:yellow;
+	background-color:#cc0000;
+	text-align:center;
+	align-content:center;
+	position:relative;
+	border-bottom-left-radius:4px;
+    border-bottom-right-radius:4px;
+}
+
+.alogo {
+	color: yellow;
+	padding-bottom:5px;
+}
+
+.alogo:hover{
+	color:rgb(255,255,200);
+	cursor:pointer;
+	
+}
+.alogo:link{
+	text-decoration:none;   
+}
+
+.logo{
+	background: url(../img/logo_comunista.png);
+	width:70px;
+	height:70px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin:0 0;
+    vertical-align:middle;
+}
+

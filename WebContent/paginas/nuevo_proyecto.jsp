@@ -8,7 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Crear un nuevo proyecto</title>
 
-<link href="<c:url value='/recursos/css/jquery-ui.css' />" rel="stylesheet" />
+<link href="<c:url value="/recursos/css/bootstrap.css" />" rel="stylesheet" />
+<link href="<c:url value="/recursos/css/bootstrap.css" />" rel="stylesheet" />
+<link href="<c:url value="/recursos/css/estilo_general.css" />" rel="stylesheet" />
+<link href="<c:url value="/recursos/css/jquery-ui.css" />" rel="stylesheet" />
 <script src='<c:url value="/recursos/js/jquery-2.1.1.min.js" />'></script>
 <script src='<c:url value="/recursos/js/jquery-ui.min.js" />'></script>
 
@@ -24,38 +27,49 @@
 </head>
 <body>
 
-<form action="grabarNuevoProyecto" method="post">
-	<table>
-		<tr><th colspan="2">Nuevo proyecto</th></tr>
-		<tr>
-			<td>Nombre de proyecto</td>
-			<td><input type="text" name="nom_pro" placeholder="ProyectoX"></td>
-		</tr>
-		<tr>
-			<td>Fecha Inicio</td>
-			<td><input type="text" name="fec_ini_pro" class="datepicker"></td>
-		</tr>
-		<tr>
-			<td>Fecha Límite</td>
-			<td><input type="text" name="fec_lim_pro" class="datepicker"></td>
-		</tr>
+<div class="todo">
 
-		<tr>
-			<td>Perfil</td>
-			<td>
-				<select name="perfil">
-					<c:forEach items="${listaPerfiles }" var="x">
-						<option value="${x.cod_per }">${x.des_per }</option>
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Grabar"></td>
-		</tr>
-	</table>
-</form>
-<a href="${pageContext.request.contextPath }/cargarProyectos"></a>
+	<%@include file="encabezado.jsp" %>
+	
+
+	<div class="contenido">
+	
+		<form action="grabarNuevoProyecto" method="post">
+			<table>
+				<tr><th colspan="2">Nuevo proyecto</th></tr>
+				<tr>
+					<td>Nombre de proyecto</td>
+					<td><input type="text" name="nom_pro" placeholder="ProyectoX"></td>
+				</tr>
+				<tr>
+					<td>Fecha Inicio</td>
+					<td><input type="text" name="fec_ini_pro" class="datepicker"></td>
+				</tr>
+				<tr>
+					<td>Fecha Límite</td>
+					<td><input type="text" name="fec_lim_pro" class="datepicker"></td>
+				</tr>
+		
+				<tr>
+					<td>Perfil</td>
+					<td>
+						<select name="perfil">
+							<c:forEach items="${listaPerfiles }" var="x">
+								<option value="${x.cod_per }">${x.des_per }</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Grabar"></td>
+				</tr>
+			</table>
+		</form>
+		<a href="${pageContext.request.contextPath }/cargarProyectos"></a>
+	
+	</div>
+</div>
+
 </body>
 </html>
