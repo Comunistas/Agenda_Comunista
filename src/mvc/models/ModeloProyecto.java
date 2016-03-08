@@ -54,9 +54,10 @@ public class ModeloProyecto {
 	
 	public int cargarProyectos(CamaradaDTO cam){
 		int ok = 0;
+		Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
+
 		try {
 						
-			Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
 			
 			listaProyectos = sMantenimiento.listarProyectos(cn, cam);
 			listaIntegrantesPorCamarada = sMantenimiento.listarIntegrantesPorCamarada(cn, cam);
@@ -65,6 +66,11 @@ public class ModeloProyecto {
 			ok=1;
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				cn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return 0;
 		}
 		return ok;
@@ -87,6 +93,11 @@ public class ModeloProyecto {
 			ok = 1;
 		}catch(Exception e){
 			e.printStackTrace();
+			try {
+				cn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			return 0;
 		}finally{
 			try {
@@ -115,7 +126,7 @@ public class ModeloProyecto {
 		return ok;
 	}
 	
-	public int integrarseAProyecto(String llave){
+	public int integrarseAProyecto(String llave, CamaradaDTO cam){
 		
 		int ok = 0;
 		ProyectoDTO pro;
@@ -124,6 +135,11 @@ public class ModeloProyecto {
 						
 			if((pro = sMantenimiento.obtenerProyecto(null, llave))!=null){
 				ok = 1;
+				
+				Proyecto_IntegranteDTO pi = new Proyecto_IntegranteDTO(pro.getCod_pro(), cam.getCod_cam(), new PerfilDTO(1, null), 0);
+				ok=sMantenimiento.grabarIntegrante(null, pi);
+				
+				if(ok==0)return ok;
 				
 				ok = cargarDatosPaginaInicio(pro);
 			}

@@ -340,9 +340,11 @@ DELIMITER ;
 -- ------------------------------------ INSERCIONES -------------------------------------------------
 -- --------------------------------------------------------------------------------------------------
 
+insert tb_perfil values (0,'Sin perfil');
 insert tb_perfil values (0,'Coordinador');
 
 use bd_agenda_comunista;
+select * from tb_perfil;
 select * from tb_proyecto; 
 select * from tb_camarada;
-select * from proyecto_integrante;
+select * from tb_proyecto_integrante;

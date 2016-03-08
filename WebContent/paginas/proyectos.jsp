@@ -15,6 +15,7 @@
 <link href="<c:url value="/recursos/css/jquery-ui.css" />" rel="stylesheet" />
 <script src='<c:url value="/recursos/js/jquery-2.1.1.min.js" />'></script>
 <script src='<c:url value="/recursos/js/jquery-ui.min.js" />'></script>
+
 </head>
 <body>
 
@@ -22,34 +23,41 @@
 
 	<%@include file="encabezado.jsp" %>
 	
-	<table>
-		<tr>
-			<th colspan="4"><center>Mis Proyectos</center></th>
-		</tr>
-		
-		<c:if test="${empty m.listaProyectos }">
-			<tr><td colspan="4"><center>No estás asociado a ningún proyecto</center></td></tr>
-		</c:if>
-		
-		<tr>
-			<td>Fec. Inicio</td>
-			<td>Nombre</td>
-			<td>Perfil</td>
-			<td>Llave</td>
-		</tr>
-		<c:forEach items="${m.listaProyectos }" var="proEntry">
-			<tr class="${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].coordinador == 1 ? 'active' : ''}">
-				<td style="width:20%">${proEntry.value.fec_ini_pro }</td>
-				<td style="width:30%">${proEntry.value.nom_pro }</td>
-				<td style="width:20%">${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].perfil.des_per }</td>
-				<td style="width:30%">${proEntry.value.llave }</td>
+	<div class="container contenido">
+	
+		<table class="table table-striped">
+			<tr>
+				<th colspan="4"><center>Mis Proyectos</center></th>
 			</tr>
-		</c:forEach>
-	</table>
-	<a href="${pageContext.request.contextPath }/nuevoProyecto">Crear nuevo proyecto</a><br>
-	${msjCargarProyectos }<br>
-	${msjGrabarProyecto }<br>
-	${llave!=null ? 'Con esta llave tus amigos podrán unirse al proyecto que has creado: ' : '' }${llave}
+			
+			<c:if test="${empty m.listaProyectos }">
+				<tr><td colspan="4"><center>No estás asociado a ningún proyecto</center></td></tr>
+			</c:if>
+			
+			<tr>
+				<td>Fec. Inicio</td>
+				<td>Nombre</td>
+				<td>Perfil</td>
+				<td>Llave</td>
+			</tr>
+			<c:forEach items="${m.listaProyectos }" var="proEntry">
+				<tr class="${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].coordinador == 1 ? 'active' : ''}">
+					<td style="width:20%">${proEntry.value.fec_ini_pro }</td>
+					<td style="width:30%">${proEntry.value.nom_pro }</td>
+					<td style="width:20%">${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].perfil.des_per }</td>
+					<td style="width:30%"><a href="#${proEntry.value.cod_pro }">Llave</a></td>
+				</tr>
+			</c:forEach>
+			<tr><td colspan="4"><center><a href="${pageContext.request.contextPath }/nuevoProyecto">Crear nuevo proyecto</a></center></td></tr>
+			<tr><td colspan="4"><center><a href="${pageContext.request.contextPath }/asociarse">Asociarse a un proyecto</a></center></td></tr>
+		</table>
+		
+		${msjCargarProyectos }<br>
+		${msjAsociarseAProyecto}
+		${msjGrabarProyecto }<br>
+		${llave!=null ? 'Con esta llave tus amigos podrán unirse al proyecto que has creado: ' : '' }${llave}
+	
+	</div>
 
 </div>
 
