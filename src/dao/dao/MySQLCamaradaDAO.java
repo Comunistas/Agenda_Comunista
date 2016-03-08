@@ -68,7 +68,7 @@ public class MySQLCamaradaDAO implements CamaradaDAO{
 					+ "on c.cod_cam = pi.cod_cam "
 					+ "inner join tb_proyecto p "
 					+ "on pi.cod_pro = p.cod_pro "
-					+ "where cod_pro = ?";
+					+ "where p.cod_pro = ?";
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setInt(1, cod_pro);
 			
