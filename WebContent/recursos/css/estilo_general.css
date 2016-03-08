@@ -1,6 +1,8 @@
 .contenido{
 	width:90%;
+	margin: 0 auto;
 }
+
 
 .encabezado{
 	color:yellow;
@@ -36,5 +38,9 @@
     background-size: cover;
     margin:0 0;
     vertical-align:middle;
+}
+
+.logo:hover{
+	cursor:pointer;
 }
 
