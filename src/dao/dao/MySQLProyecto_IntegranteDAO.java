@@ -50,7 +50,7 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 	}
 
 	@Override
-	public int grabarIntegrante(Connection con, Proyecto_IntegranteDTO pi) {
+	public int grabarIntegrante(Connection con, Proyecto_IntegranteDTO pi) throws Exception {
 
 		Connection cn = MySQLConexion.getConexion(DAOFactory.bd, con);
 		int rs = 0;
@@ -69,13 +69,14 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 			
 		}catch(Exception e){
 			imprimirError("Error al grabar integrante "+pi.getCod_cam()+" de proyecto.");
+			throw e;
 		}
 		
 		return rs;
 	}
 
 	@Override
-	public int eliminarIntegrante(Connection con, Proyecto_IntegranteDTO pi) {
+	public int eliminarIntegrante(Connection con, Proyecto_IntegranteDTO pi) throws Exception {
 		
 		Connection cn = MySQLConexion.getConexion(DAOFactory.bd, con);
 		int rs = 0;
@@ -92,6 +93,7 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 			
 		}catch(Exception e){
 			imprimirError("Error al eliminar al integrante "+pi.getCod_cam()+" de proyecto.");
+			throw e;
 		}
 		
 		return rs;
@@ -135,6 +137,7 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 			
 		}catch(Exception e){
 			imprimirError("Error al listar proyecto_integrante, por camarada");
+			throw e;
 		}
 		return lista;
 	}
