@@ -1,23 +1,18 @@
 package mvc.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.TreeMap;
 
-import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.beans.CamaradaDTO;
-import dao.beans.PerfilDTO;
-import dao.beans.ProyectoDTO;
-import dao.beans.Proyecto_IntegranteDTO;
+
 import mvc.models.ModeloProyecto;
 
 /**
@@ -36,21 +31,23 @@ public class CargarProyectosController{
 	}
 	
 	@RequestMapping("/cargarProyectos")
-	public ModelAndView servicio(HttpSession sesion, Model modelo, @ModelAttribute("modelo") ModeloProyecto modeloProyecto) throws Exception {
+	public ModelAndView servicio(HttpSession sesion, Model modelo, @ModelAttribute("modelo") ModeloProyecto modeloProyecto,
+			HttpServletResponse response) throws Exception {
 		
 		
 		ModelAndView mav = new ModelAndView("/proyectos");
-		int ok = cargarProyectos(sesion, modelo,modeloProyecto);
+		int ok = cargarProyectos(sesion, modelo,modeloProyecto, response);
 
 		if(ok==0){
 			mav.addObject("msjCargarProyectos", "Error al cargar proyectos.");
 		}
 		
+		
 		return mav;
 		
 	}
 	
-	private int cargarProyectos(HttpSession sesion, Model modelo, ModeloProyecto m){
+	private int cargarProyectos(HttpSession sesion, Model modelo, ModeloProyecto m, HttpServletResponse response){
 		int ok = 0;
 		CamaradaDTO cam = (CamaradaDTO)sesion.getAttribute("camaradaLogueado");
 
@@ -60,7 +57,7 @@ public class CargarProyectosController{
 		ok = m.cargarProyectos(cam);
 		
 		modelo.addAttribute("m", m);
-		
+		response.addCookie(m.getCookieProyecto());
 		
 		return ok;
 	}

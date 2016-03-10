@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import javax.servlet.http.Cookie;
+
 import dao.beans.ActividadDTO;
 import dao.beans.CamaradaDTO;
 import dao.beans.ComentarioDTO;
@@ -29,6 +31,7 @@ public class ModeloProyecto {
 	ArrayList<PerfilDTO> listaPerfiles;
 	ProyectoDTO proyecto;
 	String llave;
+	Cookie cookieProyecto;
 	
 	
 	
@@ -57,12 +60,13 @@ public class ModeloProyecto {
 		Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
 
 		try {
-						
+			cn.setAutoCommit(false);	
 			
 			listaProyectos = sMantenimiento.listarProyectos(cn, cam);
 			listaIntegrantesPorCamarada = sMantenimiento.listarIntegrantesPorCamarada(cn, cam);
 			listaPerfiles = sMantenimiento.listarPerfiles(cn);
-			
+			cn.commit();
+			cn.setAutoCommit(true);
 			ok=1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,13 +87,14 @@ public class ModeloProyecto {
 		Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
 
 		try{
-			
+			cn.setAutoCommit(false);
 			proyecto = p;
 			listaCamaradas = sMantenimiento.listarCamaradas(cn, p.getCod_pro());
 			listaActividades = sMantenimiento.listarActividades(cn, cod_pro);
 			listaIntegrantes = sMantenimiento.listarIntegrantes(cn, cod_pro);
 			listaComentarios = sMantenimiento.listarComentarios(cn, cod_pro);
-			
+			cn.commit();
+			cn.setAutoCommit(true);
 			ok = 1;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -151,6 +156,13 @@ public class ModeloProyecto {
 		
 		return ok;
 	}
+	
+	public void crearCookieProyecto(){
+		cookieProyecto = new Cookie("npreal", String.valueOf(proyecto.getCod_pro()));
+		cookieProyecto.setPath("/");
+		cookieProyecto.setMaxAge(60*20);
+	}
+	
 
 	public HashMap<String, CamaradaDTO> getListaCamaradas() {
 		return listaCamaradas;
@@ -184,5 +196,9 @@ public class ModeloProyecto {
 	}
 	public ArrayList<PerfilDTO> getListaPerfiles(){
 		return listaPerfiles;
+	}
+	public Cookie getCookieProyecto(){
+		crearCookieProyecto();
+		return cookieProyecto;
 	}
 }
