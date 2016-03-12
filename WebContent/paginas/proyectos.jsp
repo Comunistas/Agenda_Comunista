@@ -22,7 +22,10 @@
 
 <div class="todo">
 
-	<%@include file="encabezado.jsp" %>
+	<div class="encabezado">
+	<div><a class="alogo" href="login"><label class="logo"></label><br><h2>Agenda Comunista</h2></a></div>
+	<br>
+	</div>
 	
 	<div class="container contenido">
 	

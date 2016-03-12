@@ -27,7 +27,7 @@
 
 
 	<div class="contenido">
-		<form action="nuevoCamarada" method="post">
+		<form action="${pageContext.request.contextPath }/registro.accion" method="post">
 			<table>
 				<tr><th colspan="2"><h2>Registro de Camarada</h2></th></tr>
 				<tr>
@@ -57,7 +57,7 @@
 			</table>
 		</form>
 		
-		<a href="${pageContext.request.contextPath }/paginas/login.jsp">Regresar al login</a>
+		<a href="${pageContext.request.contextPath }/login">Regresar al login</a>
 		
 		${msjRegistro }
 	</div>
