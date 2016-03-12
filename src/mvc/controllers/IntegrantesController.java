@@ -3,6 +3,7 @@ package mvc.controllers;
 import mvc.models.ModeloProyecto;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,10 +33,8 @@ public class IntegrantesController {
 			mav=new ModelAndView("redirect:/error");
 			ra.addFlashAttribute("msjError", MSJERROR);
 		}else{
-			ProyectoDTO p = new ProyectoDTO();
-			p.setCod_pro(cod_pro);
 			
-			ok = mP.cargarDatosPaginaInicio(p);
+			ok = mP.cargarDatosPaginaInicio(cod_pro);
 			
 			if(ok==0){
 				mav=new ModelAndView("redirect:/error");
@@ -45,6 +44,18 @@ public class IntegrantesController {
 				mav.addObject("m", mP);
 			}
 		}
+		return mav;
+	}
+	
+	
+	@RequestMapping(value=TODOS+"/{codIntegrante}")
+	public ModelAndView cargarIntegrante(@PathVariable("codIntegrante")String cod_cam,
+											@RequestParam("np")int cod_pro){
+		ModelAndView mav;
+		
+		
+		mP.cargarDatosPaginaInicio(cod_pro);
+		
 		return mav;
 	}
 }

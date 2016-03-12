@@ -80,15 +80,15 @@ public class ModeloProyecto {
 		return ok;
 	}
 	
-	public int cargarDatosPaginaInicio(ProyectoDTO p){
+	public int cargarDatosPaginaInicio(int cod_pro){
 		
 		int ok = 0;
-		int cod_pro = p.getCod_pro();
+		
 		Connection cn = MySQLConexion.getConexion(DAOFactory.bd);
 
 		try{
 			cn.setAutoCommit(false);
-			proyecto = p;
+			proyecto = sMantenimiento.obtenerProyecto(cn, cod_pro);
 			listaCamaradas = sMantenimiento.listarCamaradas(cn, cod_pro);
 			listaActividades = sMantenimiento.listarActividades(cn, cod_pro);
 			listaIntegrantes = sMantenimiento.listarIntegrantes(cn, cod_pro);
@@ -146,7 +146,7 @@ public class ModeloProyecto {
 				
 				if(ok==0)return ok;
 				
-				ok = cargarDatosPaginaInicio(pro);
+				ok = cargarDatosPaginaInicio(pro.getCod_pro());
 			}
 			
 		}catch(Exception e){

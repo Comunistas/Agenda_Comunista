@@ -46,20 +46,15 @@ public class PaginaInicioController {
 	
 	private int obtenerProyecto(String cookiePro, int cod_pro) {
 		int ok = 0;
-
-		ProyectoDTO p = new ProyectoDTO();
 		
 		if(cod_pro!=0){
 			
-			p.setCod_pro(cod_pro);
 			
-			ok = mP.cargarDatosPaginaInicio(p);
+			ok = mP.cargarDatosPaginaInicio(cod_pro);
 			
 		}else if (!cookiePro.equals("nada")) {
-
-			p.setCod_pro(Integer.parseInt(cookiePro));
 			
-			ok = mP.cargarDatosPaginaInicio(p);
+			ok = mP.cargarDatosPaginaInicio(Integer.parseInt(cookiePro));
 			
 		}else{
 			ok = 0;
