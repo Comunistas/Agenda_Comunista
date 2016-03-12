@@ -89,7 +89,7 @@ public class ModeloProyecto {
 		try{
 			cn.setAutoCommit(false);
 			proyecto = p;
-			listaCamaradas = sMantenimiento.listarCamaradas(cn, p.getCod_pro());
+			listaCamaradas = sMantenimiento.listarCamaradas(cn, cod_pro);
 			listaActividades = sMantenimiento.listarActividades(cn, cod_pro);
 			listaIntegrantes = sMantenimiento.listarIntegrantes(cn, cod_pro);
 			listaComentarios = sMantenimiento.listarComentarios(cn, cod_pro);
@@ -158,9 +158,9 @@ public class ModeloProyecto {
 	}
 	
 	public void crearCookieProyecto(){
-		cookieProyecto = new Cookie("npreal", String.valueOf(proyecto.getCod_pro()));
+		cookieProyecto = new Cookie("npult", String.valueOf(proyecto.getCod_pro()));
 		cookieProyecto.setPath("/");
-		cookieProyecto.setMaxAge(60*20);
+		cookieProyecto.setMaxAge(60*60*24);
 	}
 	
 

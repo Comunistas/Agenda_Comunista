@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dao.beans.CamaradaDTO;
 
@@ -32,8 +33,8 @@ public class AsociarseAProyectoController {
 	
 	@RequestMapping(value="/asociarse.accion", method=RequestMethod.POST)
 	public ModelAndView asociarse(HttpSession sesion, @RequestParam("llave")String llave, @ModelAttribute("modelo")ModeloProyecto modeloProyecto,
-			HttpServletResponse response){
-		ModelAndView mav = new ModelAndView("/cargarProyectos");
+			HttpServletResponse response, RedirectAttributes ra){
+		ModelAndView mav;
 		int ok = 0;
 		
 		CamaradaDTO cam = (CamaradaDTO)sesion.getAttribute("camaradaLogueado");
@@ -41,10 +42,11 @@ public class AsociarseAProyectoController {
 		ok=modeloProyecto.integrarseAProyecto(llave, cam);
 
 		if(ok==0){
+			mav = new ModelAndView("/cargarProyectos");
 			mav.addObject("msjAsociarseAProyecto", "Error al asociarse al proyecto. Verifique la concordancia de la llave, por favor.");
 		}else{
-			mav.addObject("msjAsociarseAProyecto", "Usted se ha asociado con éxito.");
-			sesion.setAttribute("m", modeloProyecto);
+			mav = new ModelAndView("redirect:/inicio");
+			ra.addFlashAttribute("msjAsociarseAProyecto", "Usted se ha asociado con éxito.");
 			response.addCookie(modeloProyecto.getCookieProyecto());
 		}
 		return mav;

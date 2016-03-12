@@ -18,6 +18,7 @@
 
 </head>
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <div class="todo">
 
@@ -41,15 +42,18 @@
 				<td>Llave</td>
 			</tr>
 			<c:forEach items="${m.listaProyectos }" var="proEntry">
-				<tr class="${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].coordinador == 1 ? 'active' : ''}">
-					<td style="width:20%">${proEntry.value.fec_ini_pro }</td>
-					<td style="width:30%">${proEntry.value.nom_pro }</td>
-					<td style="width:20%">${m.listaIntegrantesPorCamarada[proEntry.value.cod_pro].perfil.des_per }</td>
-					<td style="width:30%"><a href="#${proEntry.value.cod_pro }">Llave</a></td>
+				<c:set var="pro" value="${proEntry.value }"/>
+				
+				<tr class="${m.listaIntegrantesPorCamarada[pro.cod_pro].coordinador == 1 ? 'active' : ''}">
+					<td style="width:20%">${pro.fec_ini_pro }</td>
+					<td style="width:30%"><a href="${contextPath }/inicio?np=${pro.cod_pro}">${pro.nom_pro }</a></td>
+					<td style="width:20%">${m.listaIntegrantesPorCamarada[pro.cod_pro].perfil.des_per }</td>
+					<td style="width:30%"><a href="#${proEntry.value.cod_pro }">Ver</a></td>
 				</tr>
+				
 			</c:forEach>
-			<tr><td colspan="4"><center><a href="${pageContext.request.contextPath }/nuevoProyecto">Crear nuevo proyecto</a></center></td></tr>
-			<tr><td colspan="4"><center><a href="${pageContext.request.contextPath }/asociarse">Asociarse a un proyecto</a></center></td></tr>
+			<tr><td colspan="4"><center><a href="${contextPath }/nuevoProyecto">Crear nuevo proyecto</a></center></td></tr>
+			<tr><td colspan="4"><center><a href="${contextPath }/asociarse">Asociarse a un proyecto</a></center></td></tr>
 		</table>
 		
 		${msjCargarProyectos }<br>

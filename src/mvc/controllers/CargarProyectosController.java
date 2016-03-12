@@ -57,7 +57,6 @@ public class CargarProyectosController{
 		ok = m.cargarProyectos(cam);
 		
 		modelo.addAttribute("m", m);
-		response.addCookie(m.getCookieProyecto());
 		
 		return ok;
 	}
