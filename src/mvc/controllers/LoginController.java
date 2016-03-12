@@ -14,14 +14,21 @@ import javax.servlet.http.HttpSession;
 
 
 import mvc.models.ModeloLogueo;
+import dao.interfaces.Mapping;
 
 @Controller
 public class LoginController {
 
+	final String LOGIN = Mapping.LOGIN;
+	final String ACCION = Mapping.ACCION;
 	ModeloLogueo m = new ModeloLogueo();
 	
+	@RequestMapping(LOGIN)
+	protected String entrarAlLogueo() throws Exception {		
+		return "/login";
+	}	
 	
-	@RequestMapping(value="/loginResult", method = RequestMethod.POST)
+	@RequestMapping(value=LOGIN+ACCION, method = RequestMethod.POST)
 	protected ModelAndView servicioPOST(HttpServletRequest rq, HttpServletResponse res) throws ServletException, IOException {
 		ModelAndView mav;
 		int ok = loguearse(rq, res);
@@ -36,13 +43,7 @@ public class LoginController {
 		
 		return mav;
 	}
-	
 
-	@RequestMapping("/login")
-	protected String entrarAlLogueo() throws Exception {		
-		return "/login";
-	}	
-	
 	private int loguearse(HttpServletRequest rq, HttpServletResponse res){
 		int ok = 0;
 		

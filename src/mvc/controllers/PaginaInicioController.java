@@ -1,5 +1,6 @@
 package mvc.controllers;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mvc.models.ModeloProyecto;
@@ -12,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.beans.ProyectoDTO;
+import dao.interfaces.Mapping;
 
 @Controller
 public class PaginaInicioController {
 
+	final String INICIO = Mapping.INICIO;
+	final String CARGARPROYECTOS = Mapping.CARGARPROYECTOS;
+	
 	ModeloProyecto mP = new ModeloProyecto();
 
 	
-	@RequestMapping(value="/inicio", method=RequestMethod.GET)
-	public ModelAndView cargarPagina(HttpSession sesion, 
+	@RequestMapping(value=INICIO, method=RequestMethod.GET)
+	public ModelAndView cargarPagina(HttpServletResponse response, 
 			@CookieValue(value="npult", defaultValue="nada") String cookiePro,
 			@RequestParam(value="np", defaultValue="0", required=false) int cod_pro){
 		
@@ -29,10 +34,11 @@ public class PaginaInicioController {
 		int ok = obtenerProyecto(cookiePro, cod_pro);
 		
 		if(ok==0){
-			mav = new ModelAndView("redirect:/cargarProyectos");
+			mav = new ModelAndView("redirect:"+CARGARPROYECTOS);
 		}else{
 			mav = new ModelAndView("/inicio");
 			mav.addObject("m", mP);
+			response.addCookie(mP.getCookieProyecto());
 		}
 		
 		return mav;
@@ -44,7 +50,6 @@ public class PaginaInicioController {
 		ProyectoDTO p = new ProyectoDTO();
 		
 		if(cod_pro!=0){
-			
 			
 			p.setCod_pro(cod_pro);
 			

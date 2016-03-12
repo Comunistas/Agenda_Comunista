@@ -26,7 +26,7 @@
 
 	<div class="container contenido">
 		
-		<form action="loginResult" method="post">
+		<form action="login.accion" method="post">
 		<center><h2>Logueo</h2></center>
 			<div class="form-group input-group col-lg-6 col-md-8 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-2">
 				<span class="input-group-addon" style="width:30%">Código</span>

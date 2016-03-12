@@ -34,7 +34,7 @@
 
 	<div class="contenido">
 	
-		<form action="grabarNuevoProyecto" method="post">
+		<form action="${pageContext.request.contextPath }/nuevoProyecto.accion" method="post">
 			<table>
 				<tr><th colspan="2">Nuevo proyecto</th></tr>
 				<tr>

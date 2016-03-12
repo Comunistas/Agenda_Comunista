@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.beans.CamaradaDTO;
-
+import dao.interfaces.Mapping;
 import mvc.models.ModeloProyecto;
 
 /**
@@ -23,6 +23,7 @@ import mvc.models.ModeloProyecto;
 public class CargarProyectosController{
 	
 	ModeloProyecto m;
+	final String CARGARPROYECTOS = Mapping.CARGARPROYECTOS;
 	
 	@ModelAttribute("modelo")
 	public ModeloProyecto instanciarModelo(){
@@ -30,7 +31,7 @@ public class CargarProyectosController{
 		return m;
 	}
 	
-	@RequestMapping("/cargarProyectos")
+	@RequestMapping(CARGARPROYECTOS)
 	public ModelAndView servicio(HttpSession sesion, Model modelo, @ModelAttribute("modelo") ModeloProyecto modeloProyecto,
 			HttpServletResponse response) throws Exception {
 		

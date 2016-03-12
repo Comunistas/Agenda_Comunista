@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dao.beans.CamaradaDTO;
 import dao.beans.PerfilDTO;
 import dao.beans.ProyectoDTO;
+import dao.interfaces.Mapping;
 import mvc.models.ModeloProyecto;
 
 @Controller
 public class GrabarProyectoController {
 
+	final String NUEVOPROYECTO = Mapping.NUEVOPROYECTO;
+	final String CARGARPROYECTOS = Mapping.CARGARPROYECTOS;
+	final String ACCION = Mapping.ACCION;
 
 	ModeloProyecto m = new ModeloProyecto();
 	
@@ -33,7 +38,7 @@ public class GrabarProyectoController {
 	}
 	
 
-	@RequestMapping("/nuevoProyecto")
+	@RequestMapping(NUEVOPROYECTO)
 	public String mapearAlNuevoProyecto(HttpSession sesion, Model modelo){
 		
 		CamaradaDTO cam = (CamaradaDTO)sesion.getAttribute("camaradaLogueado");
@@ -43,12 +48,12 @@ public class GrabarProyectoController {
 		return "/nuevo_proyecto";
 	}
 	
-	@RequestMapping("/grabarNuevoProyecto")
+	@RequestMapping(NUEVOPROYECTO+ACCION)
 	protected ModelAndView grabarProyecto(@ModelAttribute("pro") ProyectoDTO pro, HttpSession sesion,
 							@RequestParam(value="perfil", defaultValue = "0", required = false) int cod_per,
-							Model modelo) throws Exception{
+							Model modelo, RedirectAttributes ra) throws Exception{
 		
-		ModelAndView mav = new ModelAndView("forward:/cargarProyectos");
+		ModelAndView mav = new ModelAndView("redirect:"+CARGARPROYECTOS);
 		CamaradaDTO cam = (CamaradaDTO)sesion.getAttribute("camaradaLogueado");	
 		PerfilDTO p = new PerfilDTO(cod_per, "");
 
@@ -57,10 +62,10 @@ public class GrabarProyectoController {
 
 		
 		if(ok==0){
-			mav.addObject("msjGrabarProyecto", "Error al grabar nuevo proyecto");
+			ra.addFlashAttribute("msjGrabarProyecto", "Error al grabar nuevo proyecto");
 		}else{
-			mav.addObject("llave",m.getLlave());
-			mav.addObject("msjGrabarProyecto", "¡Nuevo proyecto creado!");
+			ra.addFlashAttribute("llave",m.getLlave());
+			ra.addFlashAttribute("msjGrabarProyecto", "¡Nuevo proyecto creado!");
 		}
 		
 		return mav;
