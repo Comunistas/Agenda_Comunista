@@ -208,8 +208,8 @@ public class MantenimientoService {
 	public ArrayList<Proyecto_IntegranteDTO> listarIntegrantes(Connection cn,int cod_pro) throws Exception{
 		return objProyecto_IntegranteDAO.listarIntegrantes(cn, cod_pro);
 	}
-	public Proyecto_IntegranteDTO obtenerIntegrante(Connection cn, String cod_cam) throws Exception{
-		return objProyecto_IntegranteDAO.obtenerIntegrante(cn, cod_cam);
+	public Proyecto_IntegranteDTO obtenerIntegrante(Connection cn, String cod_cam, int cod_pro) throws Exception{
+		return objProyecto_IntegranteDAO.obtenerIntegrante(cn, cod_cam, cod_pro);
 	}
 	public HashMap<Integer, Proyecto_IntegranteDTO> listarIntegrantesPorCamarada(Connection cn, CamaradaDTO cam) throws Exception {
 		return objProyecto_IntegranteDAO.listarIntegrantesPorCamarada(cn, cam);

@@ -48,6 +48,39 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 		return lista;
 		
 	}
+	
+	@Override
+	public Proyecto_IntegranteDTO obtenerIntegrante(Connection con,
+			String cod_cam, int cod_pro) throws Exception {
+		
+		Connection cn = MySQLConexion.getConexion(DAOFactory.bd, con);
+		ResultSet rs = null;
+		String sql = "";
+		Proyecto_IntegranteDTO pi = null;
+		
+		try{
+			sql = "select * from tb_proyecto_integrante where cod_cam = ? and cod_pro = ?";
+			PreparedStatement pst = cn.prepareStatement(sql);
+			
+			pst.setString(1, cod_cam);
+			pst.setInt(2, cod_pro);
+			
+			rs = pst.executeQuery();
+
+			
+			if (rs.next()){
+				pi = new Proyecto_IntegranteDTO(rs.getInt(1), rs.getString(2), new PerfilDTO(rs.getInt(3), rs.getString(5)), rs.getInt(4));
+			}
+			
+		}catch(Exception e){
+			imprimirError("Error al obtener detalle del camarada para el proyecto seleccionado.");
+			throw e;
+		}
+		
+		
+		return pi;
+		
+	}
 
 	@Override
 	public int grabarIntegrante(Connection con, Proyecto_IntegranteDTO pi) throws Exception {
@@ -142,36 +175,6 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 		return lista;
 	}
 
-	@Override
-	public Proyecto_IntegranteDTO obtenerIntegrante(Connection con,
-			String cod_cam) throws Exception {
-		
-		Connection cn = MySQLConexion.getConexion(DAOFactory.bd, con);
-		ResultSet rs = null;
-		String sql = "";
-		Proyecto_IntegranteDTO pi = null;
-		
-		try{
-			sql = "select * from tb_proyecto_integrante where cod_cam = ?";
-			PreparedStatement pst = cn.prepareStatement(sql);
-			
-			pst.setString(1, cod_cam);
-			
-			rs = pst.executeQuery();
-
-			
-			if (rs.next()){
-				pi = new Proyecto_IntegranteDTO(rs.getInt(1), rs.getString(2), new PerfilDTO(rs.getInt(3), rs.getString(5)), rs.getInt(4));
-			}
-			
-		}catch(Exception e){
-			imprimirError("Error al obtener detalle del camarada para el proyecto seleccionado.");
-			throw e;
-		}
-		
-		
-		return pi;
-		
-	}
+	
 
 }
