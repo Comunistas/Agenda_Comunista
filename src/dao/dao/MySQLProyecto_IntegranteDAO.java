@@ -59,7 +59,7 @@ public class MySQLProyecto_IntegranteDAO implements Proyecto_IntegranteDAO{
 		Proyecto_IntegranteDTO pi = null;
 		
 		try{
-			sql = "select * from tb_proyecto_integrante where cod_cam = ? and cod_pro = ?";
+			sql = "select pi.*, pe.des_per from tb_proyecto_integrante pi inner join tb_perfil pe on pi.cod_per = pe.cod_per where cod_cam = ? and cod_pro = ?";
 			PreparedStatement pst = cn.prepareStatement(sql);
 			
 			pst.setString(1, cod_cam);
