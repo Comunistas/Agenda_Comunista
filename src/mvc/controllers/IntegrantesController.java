@@ -1,5 +1,7 @@
 package mvc.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import mvc.models.ModeloProyecto;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dao.beans.CamaradaDTO;
 import dao.beans.ProyectoDTO;
+import dao.beans.Proyecto_IntegranteDTO;
 import dao.interfaces.Mapping;
 
 @Controller
@@ -29,9 +32,9 @@ public class IntegrantesController {
 
 	@RequestMapping(value = TODOS, method=RequestMethod.GET)
 	public ModelAndView cargarIntegrantes(@RequestParam(value="np", defaultValue="0") int cod_pro,
-			RedirectAttributes ra){
+			RedirectAttributes ra, HttpServletRequest rq){
 		ModelAndView mav;
-		
+				
 		int ok = 0;
 		if(cod_pro==0){
 			mav=new ModelAndView("redirect:/error");
@@ -60,17 +63,21 @@ public class IntegrantesController {
 		
 		int ok = 0;
 		
-		ok = mP.cargarDatosPaginaInicio(cod_pro);
+		ok = mP.cargarDatosCamaradaPorProyecto(cod_cam, cod_pro);
 		
 		if(ok==0){
 			mav = new ModelAndView("redirect:"+ERROR);
 			ra.addFlashAttribute("msjError", MSJERRORINTEGRANTE);
 		}else{
 			
-			CamaradaDTO cam = mP.getListaCamaradas().get(cod_cam);
+			CamaradaDTO cam = mP.getCamarada();
+			
+			Proyecto_IntegranteDTO camInt = mP.getIntegrante();
+			
 			
 			mav = new ModelAndView("/camarada");
 			mav.addObject("cam",  cam);
+			mav.addObject("camInt", camInt);
 			mav.addObject("m", mP);
 		}
 		

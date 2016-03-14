@@ -25,32 +25,12 @@
 	<%@include file="encabezado.jsp" %>
 	
 	<div class="contanier contenido">
-		<table class="table table-bordered table-striped">
-			
-			<c:if test="${camIntLog.coordinador==1}">
-				<tr><th colspan="2">Integrantes</th></tr>
-				<c:forEach var="x" items="${m.listaCamaradas }">
-					<tr>
-						<td>
-							<a href="todos/${x.value.cod_cam }?np=${m.proyecto.cod_pro}">${x.value.nom_cam }</a><br>
-						</td>
-						<td>
-							<a href="eliminar/${x.value.cod_cam }?np=${m.proyecto.cod_pro}">Eliminar</a><br>
-						</td>
-					</tr>
-				</c:forEach>	
-			</c:if>
-			<c:if test="${camIntLog.coordinador==0 }">
-				<tr><th>Integrantes</th></tr>
-				<c:forEach var="x" items="${m.listaCamaradas }">
-					<tr>
-						<td>
-							<a href="todos/${x.value.cod_cam }?np=${m.proyecto.cod_pro}">${x.value.nom_cam }</a><br>
-						</td>
-					</tr>
-				</c:forEach>	
-			</c:if>
-		</table>
+		${cam.cod_cam }<br>
+		${cam.nom_cam }<br>
+		${cam.ape_cam }<br>
+		${cam.tel_cam }<br>
+		${camInt.perfil.des_per }<br>
+		${cam.fec_ult_ing }
 	</div>
 </div>
 </body>

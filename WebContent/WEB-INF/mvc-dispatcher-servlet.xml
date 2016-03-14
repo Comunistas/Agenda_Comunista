@@ -22,11 +22,25 @@
 	<mvc:resources mapping="/recursos/**" location="/recursos/" cache-period="31556926" />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*"/>
-			<mvc:exclude-mapping path="/login"/>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login*"/>
+			<mvc:exclude-mapping path="/recursos/**"/>
+			<mvc:exclude-mapping path="/registro*"/>
+			<mvc:exclude-mapping path="/error"/>
 			<bean class="mvc.interceptors.SessionInterceptor"/>
 		</mvc:interceptor>
 	
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login*"/>
+			<mvc:exclude-mapping path="/recursos/**"/>
+			<mvc:exclude-mapping path="/registro*"/>
+			<mvc:exclude-mapping path="/cargarProyectos"/>
+			<mvc:exclude-mapping path="/nuevoProyecto*"/>
+			<mvc:exclude-mapping path="/asociarse*"/>
+			<mvc:exclude-mapping path="/error"/>
+			<bean class="mvc.interceptors.IntegranteProyectoInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
     <bean id="viewResolver"

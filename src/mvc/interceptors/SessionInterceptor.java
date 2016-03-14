@@ -25,7 +25,9 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest rq, HttpServletResponse res, Object handler){
 		
 		HttpSession sesion = rq.getSession();
-		System.out.println("Hola, soy el interceptor");
+		
+		System.out.println("Hola, soy el interceptor de sesión : "+rq.getRequestURI());
+
 		if(sesion.getAttribute("camaradaLogueado")==null){
 			Cookie[] todosLosCookies = rq.getCookies();
 			String logueado = null;
@@ -45,6 +47,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 					cam = mL.getCamarada();
 
 					sesion.setAttribute("camaradaLogueado", cam);
+					res.addCookie(mL.getCookieLogueado());
 					System.out.println("Hola, soy el interceptor, y he logueado al camarada de nuevo.");
 				}
 					

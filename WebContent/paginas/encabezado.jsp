@@ -7,7 +7,7 @@
 			
 			<div class="collapse navbar-collapse" id="navbarr">
 				<ul class="nav navbar-nav">
-				<li><a href="${contextPath }/inicio">Inicio</a></li>
+				<li><a href="${contextPath }/inicio?np=${m.proyecto.cod_pro}">Inicio</a></li>
 				<li><a href="${contextPath }/integrantes/todos?np=${m.proyecto.cod_pro}">Integrantes</a></li>
 				<li><a>Actividades</a></li>
 				<li><a>Reuniones</a></li>
