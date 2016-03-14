@@ -32,8 +32,24 @@ public class ModeloProyecto {
 	ProyectoDTO proyecto;
 	String llave;
 	Cookie cookieProyecto;
+	CamaradaDTO camarada;
+	Proyecto_IntegranteDTO integrante;
 	
 	
+	public boolean estaAsociado(String cod_cam, int cod_pro){
+		boolean ok = false;
+		
+		try{
+			if(sMantenimiento.obtenerIntegrante(null, cod_cam, cod_pro)!=null){
+				ok = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		
+		return ok;
+	}
 	
 	public int grabarNuevoProyecto(ProyectoDTO pro, CamaradaDTO cam, PerfilDTO p){
 		
@@ -51,6 +67,18 @@ public class ModeloProyecto {
 			e.printStackTrace();
 		}
 		
+		
+		return ok;
+	}
+	
+	public int cargarProyecto(int cod_pro){
+		int ok = 0;
+		
+		try{
+			proyecto = sMantenimiento.obtenerProyecto(null, cod_pro);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		return ok;
 	}
@@ -110,6 +138,25 @@ public class ModeloProyecto {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+		
+		return ok;
+		
+	}
+	
+	
+	
+	public int cargarDatosCamaradaPorProyecto(String cod_cam, int cod_pro){
+		
+		int ok = 0;
+		
+		try{
+			camarada = sMantenimiento.obtenerCamarada(null, cod_cam);
+			integrante = sMantenimiento.obtenerIntegrante(null, cod_cam,cod_pro);
+			ok=1;
+		}catch(Exception e){
+			e.printStackTrace();
+			ok=0;
 		}
 		
 		return ok;
@@ -200,5 +247,11 @@ public class ModeloProyecto {
 	public Cookie getCookieProyecto(){
 		crearCookieProyecto();
 		return cookieProyecto;
+	}
+	public CamaradaDTO getCamarada(){
+		return camarada;
+	}
+	public Proyecto_IntegranteDTO getIntegrante(){
+		return integrante;
 	}
 }
