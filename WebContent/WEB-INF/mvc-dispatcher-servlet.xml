@@ -20,6 +20,14 @@
 	<context:annotation-config/>
 
 	<mvc:resources mapping="/recursos/**" location="/recursos/" cache-period="31556926" />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*"/>
+			<mvc:exclude-mapping path="/login"/>
+			<bean class="mvc.interceptors.SessionInterceptor"/>
+		</mvc:interceptor>
+	
+	</mvc:interceptors>
 	
     <bean id="viewResolver"
     	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >

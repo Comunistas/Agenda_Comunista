@@ -48,7 +48,7 @@ public class ModeloLogueo {
 	
 	private void crearCookieLogueado(){
 		
-		cookieLogueado = new Cookie("logueado", cam.getCod_cam());
+		cookieLogueado = new Cookie("lgd", cam.getCod_cam()+" - "+cam.getPwd_cam());
 		
 		
 		cookieLogueado.setMaxAge(60*20);
@@ -60,7 +60,7 @@ public class ModeloLogueo {
 	
 	private void crearCookiePwd(){
 		
-		cookiePwd = new Cookie("recordarPwd", cam.getPwd_cam());
+		cookiePwd = new Cookie("recPwd", cam.getPwd_cam());
 
 		if(recordar) cookiePwd.setMaxAge(60*60*24*365);
 		else cookiePwd.setMaxAge(0);
@@ -70,7 +70,7 @@ public class ModeloLogueo {
 	
 	private void crearCookieRecordar(){
 		
-		cookieRecordar = new Cookie("recordarUsuario", cam.getCod_cam());
+		cookieRecordar = new Cookie("recUsu", cam.getCod_cam());
 
 		if(recordar) cookieRecordar.setMaxAge(60*60*24*365);
 		else cookieRecordar.setMaxAge(0);
